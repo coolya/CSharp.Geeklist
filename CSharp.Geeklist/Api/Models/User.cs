@@ -28,7 +28,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist user.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	[Serializable]
+	
 	public class User
 	{
 		[JsonProperty("active_at")]
@@ -99,7 +99,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist user settings.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	[Serializable]
+	
 	public class Settings
 	{
 		[JsonProperty("h5")]
@@ -113,7 +113,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist user H5 settings.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	[Serializable]
+	
 	public class H5Settings
 	{
 		[JsonProperty("tweet")]
@@ -124,7 +124,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist user micro settings.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	[Serializable]
+	
 	public class MicroSettings
 	{
 		[JsonProperty("card")]
@@ -138,7 +138,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist user card settings.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	[Serializable]
+	
 	public class CardSettings
 	{
 		[JsonProperty("headline")]

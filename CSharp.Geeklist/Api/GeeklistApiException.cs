@@ -20,8 +20,6 @@
 
 using System;
 using System.Runtime.Serialization;
-using System.Security.Permissions;
-using Spring.Social;
 
 namespace CSharp.Geeklist.Api
 {
@@ -29,8 +27,8 @@ namespace CSharp.Geeklist.Api
     /// The exception that is thrown when a error occurs while consuming Geeklist REST API.
     /// </summary>
     /// <author>Scott Smith</author>
-    [Serializable]
-    public class GeeklistApiException : SocialException
+    
+    public class GeeklistApiException : Exception
     {
         private readonly GeeklistApiError _error;
 
@@ -62,48 +60,6 @@ namespace CSharp.Geeklist.Api
             : base(message, innerException)
         {
             _error = GeeklistApiError.ServerError;
-        }
-
-        /// <summary>
-        /// Creates a new instance of the <see cref="GeeklistApiException"/> class.
-        /// </summary>
-        /// <param name="info">
-        /// The <see cref="System.Runtime.Serialization.SerializationInfo"/>
-        /// that holds the serialized object data about the exception being thrown.
-        /// </param>
-        /// <param name="context">
-        /// The <see cref="System.Runtime.Serialization.StreamingContext"/>
-        /// that contains contextual information about the source or destination.
-        /// </param>
-        protected GeeklistApiException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-            if (info != null)
-            {
-                _error = (GeeklistApiError)info.GetValue("Error", typeof(GeeklistApiError));
-            }
-        }
-
-        /// <summary>
-        /// Populates the <see cref="System.Runtime.Serialization.SerializationInfo"/> with 
-        /// information about the exception.
-        /// </summary>
-        /// <param name="info">
-        /// The <see cref="System.Runtime.Serialization.SerializationInfo"/> that holds 
-        /// the serialized object data about the exception being thrown.
-        /// </param>
-        /// <param name="context">
-        /// The <see cref="System.Runtime.Serialization.StreamingContext"/> that contains contextual 
-        /// information about the source or destination.
-        /// </param>
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            base.GetObjectData(info, context);
-            if (info != null)
-            {
-                info.AddValue("Error", _error);
-            }
         }
     }
 }

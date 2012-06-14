@@ -18,8 +18,6 @@
 
 #endregion
 
-using Spring.Rest.Client;
-using Spring.Social;
 
 namespace CSharp.Geeklist.Api.Interfaces
 {
@@ -27,7 +25,7 @@ namespace CSharp.Geeklist.Api.Interfaces
     /// Interface specifying a basic set of operations for interacting with Geeklist.
     /// </summary>
 	/// <author>Scott Smith</author>
-    public interface IGeeklist : IApiBinding
+    public interface IGeeklist 
     {
         /// <summary>
         /// Gets the portion of the Geeklist API containing the user operations.
@@ -64,13 +62,5 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// </summary>
 		IHighfiveOperations HighfiveOperations { get; }
 
-        /// <summary>
-        /// Gets the underlying <see cref="IRestOperations"/> object allowing for consumption of Geeklist endpoints 
-        /// that may not be otherwise covered by the API binding. 
-        /// </summary>
-        /// <remarks>
-        /// The <see cref="IRestOperations"/> object returned is configured to include an OAuth "Authorization" header on all requests.
-        /// </remarks>
-        IRestOperations RestOperations { get; }
     }
 }

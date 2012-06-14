@@ -19,7 +19,6 @@
 #endregion
 
 using CSharp.Geeklist.Api.Enums;
-using Spring.Http;
 using System.Threading.Tasks;
 
 namespace CSharp.Geeklist.Api.Interfaces
@@ -36,7 +35,7 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// <param name="type">The type of item to highfive.</param>
 		/// <param name="itemId">The id of the item to be highfived.</param>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		HttpResponseMessage Highfive(HighfiveType type, string itemId);
+		bool Highfive(HighfiveType type, string itemId);
 
 		/// <summary>
 		/// Asynchronously highfives the specified card or micro
@@ -44,6 +43,6 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// <param name="type">The type of item to highfive.</param>
 		/// <param name="itemId">The id of the item to be highfived.</param>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<HttpResponseMessage> HighfiveAsync(HighfiveType type, string itemId);
+		Task<bool> HighfiveAsync(HighfiveType type, string itemId);
 	}
 }

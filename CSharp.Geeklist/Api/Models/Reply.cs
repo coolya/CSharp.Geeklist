@@ -27,7 +27,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist short code.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	[Serializable]
+	
 	public class Reply
 	{
 		[JsonProperty("in_reply_to")]

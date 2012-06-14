@@ -28,7 +28,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist criteria.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	[Serializable]
+	
 	public class Criteria
 	{
 		[JsonProperty("available_for")]

@@ -28,7 +28,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist micros details.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	[Serializable]
+	
 	public class MicrosDetails
 	{
 		[JsonProperty("total_micros")]

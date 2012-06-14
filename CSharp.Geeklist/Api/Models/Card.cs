@@ -28,7 +28,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist card.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	[Serializable]
+	
 	public class Card
 	{
 		[JsonProperty("author_id")]
@@ -93,7 +93,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist card contributor.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	[Serializable]
+	
 	public class Contributor
 	{
 		[JsonProperty("screen_name")]

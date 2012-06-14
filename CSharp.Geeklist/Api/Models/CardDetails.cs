@@ -28,7 +28,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents Geeklist cards details.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	[Serializable]
+	
 	public class CardDetails
 	{
 		[JsonProperty("total_cards")]

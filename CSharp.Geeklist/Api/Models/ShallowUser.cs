@@ -27,7 +27,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist shallow user.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	[Serializable]
+	
 	public class ShallowUser
 	{
 		[JsonProperty("id")]

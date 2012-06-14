@@ -28,7 +28,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist activities response.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	[Serializable]
+	
 	public class ActivitiesResponse
 	{
 		[JsonProperty("status")]

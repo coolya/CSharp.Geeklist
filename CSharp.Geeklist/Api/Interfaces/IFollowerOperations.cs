@@ -19,7 +19,6 @@
 #endregion
 
 using CSharp.Geeklist.Api.Models;
-using Spring.Http;
 using System.Threading.Tasks;
 
 namespace CSharp.Geeklist.Api.Interfaces
@@ -75,14 +74,14 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// </summary>
 		/// <param name="userId">The id of the user to start following.</param>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		HttpResponseMessage StartFollowing(string userId);
+		bool StartFollowing(string userId);
 
 		/// <summary>
 		/// Stop following the given user
 		/// </summary>
 		/// <param name="userId">The id of the user to stop following.</param>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		HttpResponseMessage StopFollowing(string userId);
+		bool StopFollowing(string userId);
 
 		/// <summary>
 		/// Asynchronously retrieves the first 10 followers of the authenticated user.
@@ -129,13 +128,13 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// </summary>
 		/// <param name="userId">The id of the user to start following.</param>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<HttpResponseMessage> StartFollowingAsync(string userId);
+		Task<bool> StartFollowingAsync(string userId);
 
 		/// <summary>
 		/// Asynchronously stop following the given user
 		/// </summary>
 		/// <param name="userId">The id of the user to stop following.</param>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<HttpResponseMessage> StopFollowingAsync(string userId);
+		Task<bool> StopFollowingAsync(string userId);
 	}
 }

@@ -19,9 +19,8 @@
 #endregion
 
 using System;
-using CSharp.Geeklist.Api.Impl;
 using CSharp.Geeklist.Api.Interfaces;
-using Spring.Social.OAuth1;
+
 
 namespace CSharp.Geeklist.Connect
 {
@@ -29,7 +28,7 @@ namespace CSharp.Geeklist.Connect
 	/// Geeklist <see cref="IServiceProvider"/> implementation.
     /// </summary>
     /// <author>Scott Smith</author>
-	public class GeeklistServiceProvider : AbstractOAuth1ServiceProvider<IGeeklist>
+	public class GeeklistServiceProvider    //: AbstractOAuth1ServiceProvider<IGeeklist>
     {
         /// <summary>
 		/// Creates a new instance of <see cref="GeeklistServiceProvider"/>.
@@ -37,32 +36,32 @@ namespace CSharp.Geeklist.Connect
         /// <param name="consumerKey">The application's API key.</param>
         /// <param name="consumerSecret">The application's API secret.</param>
 		public GeeklistServiceProvider(string consumerKey, string consumerSecret)
-            : base(consumerKey, consumerSecret, new OAuth1Template(consumerKey, consumerSecret,
-				"http://sandbox-api.geekli.st/v1/oauth/request_token",
-				"http://sandbox.geekli.st/oauth/authorize",
-				"http://sandbox-api.geekli.st/v1/oauth/access_token"))
+            //: base(consumerKey, consumerSecret, new OAuth1Template(consumerKey, consumerSecret,
+				//"http://sandbox-api.geekli.st/v1/oauth/request_token",
+		//		"http://sandbox.geekli.st/oauth/authorize",
+			//	"http://sandbox-api.geekli.st/v1/oauth/access_token"))
         {
 			//TODO: Change the Urls to the live version of Geeklist's API
         }
 
-		/// <summary>
-		/// Returns an API interface allowing the client application to access unprotected resources.
-		/// </summary>
-		/// <returns>A binding to the service provider's API.</returns>
-		public IGeeklist GetAPi()
-		{
-			return new GeeklistTemplate();
-		}
+        ///// <summary>
+        ///// Returns an API interface allowing the client application to access unprotected resources.
+        ///// </summary>
+        ///// <returns>A binding to the service provider's API.</returns>
+        //public IGeeklist GetAPi()
+        //{
+        //    //return new GeeklistTemplate();
+        //}
 
-        /// <summary>
-        /// Returns an API interface allowing the client application to access protected resources on behalf of a user.
-        /// </summary>
-        /// <param name="accessToken">The API access token.</param>
-        /// <param name="secret">The access token secret.</param>
-        /// <returns>A binding to the service provider's API.</returns>
-		public override IGeeklist GetApi(string accessToken, string secret)
-        {
-			return new GeeklistTemplate(ConsumerKey, ConsumerSecret, accessToken, secret);
-        }
+        ///// <summary>
+        ///// Returns an API interface allowing the client application to access protected resources on behalf of a user.
+        ///// </summary>
+        ///// <param name="accessToken">The API access token.</param>
+        ///// <param name="secret">The access token secret.</param>
+        ///// <returns>A binding to the service provider's API.</returns>
+        //public override IGeeklist GetApi(string accessToken, string secret)
+        //{
+        //    return new GeeklistTemplate(ConsumerKey, ConsumerSecret, accessToken, secret);
+        //}
     }
 }

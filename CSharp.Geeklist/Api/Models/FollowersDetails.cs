@@ -28,7 +28,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents Geeklist followers details.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	[Serializable]
+	
 	public class FollowersDetails
 	{
 		[JsonProperty("total_followers")]
