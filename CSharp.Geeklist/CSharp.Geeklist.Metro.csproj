@@ -9,7 +9,7 @@
     <ProjectGuid>{F96F6D38-D339-4392-9D59-D4C1F9D18FD5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CSharp.Geeklist.Metro</RootNamespace>
+    <RootNamespace>CSharp.Geeklist</RootNamespace>
     <AssemblyName>CSharp.Geeklist.Metro</AssemblyName>
     <DefaultLanguage>de-DE</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
@@ -105,6 +105,7 @@
     <Compile Include="Api\GeeklistApiException.cs" />
     <Compile Include="Api\Impl\ActivityOperation.cs" />
     <Compile Include="Api\Impl\CardOperations.cs" />
+    <Compile Include="Api\Impl\FollowerOperations.cs" />
     <Compile Include="Api\Impl\OAuthAwareOperation.cs" />
     <Compile Include="Api\Impl\UserOperations.cs" />
     <Compile Include="Api\Interfaces\IActivityOperations.cs" />
