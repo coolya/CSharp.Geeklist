@@ -106,6 +106,9 @@
     <Compile Include="Api\Impl\ActivityOperation.cs" />
     <Compile Include="Api\Impl\CardOperations.cs" />
     <Compile Include="Api\Impl\FollowerOperations.cs" />
+    <Compile Include="Api\Impl\FollowingOperations.cs" />
+    <Compile Include="Api\Impl\HighFiveOperations.cs" />
+    <Compile Include="Api\Impl\MicroOperations.cs" />
     <Compile Include="Api\Impl\OAuthAwareOperation.cs" />
     <Compile Include="Api\Impl\UserOperations.cs" />
     <Compile Include="Api\Interfaces\IActivityOperations.cs" />

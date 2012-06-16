@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Chq.OAuth;
 using Newtonsoft.Json;
 
 namespace CSharp.Geeklist.Api.Impl
@@ -14,6 +15,8 @@ namespace CSharp.Geeklist.Api.Impl
         const string FORING_CARDS = API_ROOT + "users/:{0}/cards";
         const string SINGLE_CARD = API_ROOT + "cards/:{0}";
 
+        public CardOperations(Client client) : base(client) {}
+
         public Models.CardsResponse GetUserCards()
         {
             return GetUserCards(1, 10);
@@ -21,8 +24,7 @@ namespace CSharp.Geeklist.Api.Impl
 
         public Models.CardsResponse GetUserCards(int page, int count)
         {
-            var req = GetRequest(new Uri(OWN_CARDS), page, count).ExecuteRequest().Result;
-            return JsonConvert.DeserializeObject<Models.CardsResponse>(req);
+            return Get<Models.CardsResponse>(OWN_CARDS, page, count);
         }
 
         public Models.CardsResponse GetUserCards(string screenName)
@@ -32,14 +34,12 @@ namespace CSharp.Geeklist.Api.Impl
 
         public Models.CardsResponse GetUserCards(string screenName, int page, int count)
         {
-            var req = GetRequest(new Uri(string.Format(FORING_CARDS, screenName)), page, count).ExecuteRequest().Result;
-            return JsonConvert.DeserializeObject<Models.CardsResponse>(req);
+            return Get<Models.CardsResponse>(string.Format(FORING_CARDS, screenName), page, count);
         }
 
         public Models.CardResponse GetCard(string cardId)
         {
-            var req = GetRequest(new Uri(string.Format(SINGLE_CARD, cardId))).ExecuteRequest().Result;
-            return JsonConvert.DeserializeObject<Models.CardResponse>(req);
+            return Get<Models.CardResponse>(string.Format(SINGLE_CARD, cardId));
         }
 
         public Models.CardResponse CreateCard(string headline)
@@ -54,8 +54,7 @@ namespace CSharp.Geeklist.Api.Impl
 
         public async Task<Models.CardsResponse> GetUserCardsAsync(int page, int count)
         {
-            var req = await GetRequest(new Uri(OWN_CARDS), page, count).ExecuteRequest();
-            return await JsonConvert.DeserializeObjectAsync<Models.CardsResponse>(req);
+            return await GetAsync<Models.CardsResponse>(OWN_CARDS, page, count);
         }
 
         public async Task<Models.CardsResponse> GetUserCardsAsync(string screenName)
@@ -65,14 +64,12 @@ namespace CSharp.Geeklist.Api.Impl
 
         public async Task<Models.CardsResponse> GetUserCardsAsync(string screenName, int page, int count)
         {
-            var req = await GetRequest(new Uri(string.Format(FORING_CARDS, screenName)), page, count).ExecuteRequest();
-            return await JsonConvert.DeserializeObjectAsync<Models.CardsResponse>(req);
+            return await GetAsync<Models.CardsResponse>(string.Format(FORING_CARDS, screenName), page, count);
         }
 
         public async Task<Models.CardResponse> GetCardAsync(string cardId)
         {
-            var req = await GetRequest(new Uri(string.Format(SINGLE_CARD, cardId))).ExecuteRequest();
-            return await JsonConvert.DeserializeObjectAsync<Models.CardResponse>(req);
+            return await GetAsync<Models.CardResponse>(string.Format(SINGLE_CARD, cardId));
         }
 
         public async Task<Models.CardResponse> CreateCardAsync(string headline)

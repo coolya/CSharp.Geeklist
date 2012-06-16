@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Chq.OAuth;
 using Newtonsoft.Json;
 
 namespace CSharp.Geeklist.Api.Impl
@@ -12,8 +13,8 @@ namespace CSharp.Geeklist.Api.Impl
 
         const string OWN_FOLLOWERS = API_ROOT + "user/followers";
         const string FORING_FOLLOWERS = API_ROOT + "users/:{0}/followers";
-        const string OWN_FOLLOWINGS = API_ROOT + "user/following";
-        const string FORING_FOLLOWINGS = API_ROOT + "users/:{0}/following";
+
+        public FollowerOperations(Client client) : base(client) {}
 
         public Models.FollowersResponse GetUserFollowers()
         {
@@ -22,8 +23,7 @@ namespace CSharp.Geeklist.Api.Impl
 
         public Models.FollowersResponse GetUserFollowers(int page, int count)
         {
-            var req = GetRequest(new Uri(OWN_FOLLOWERS), page, count).ExecuteRequest().Result;
-            return JsonConvert.DeserializeObject<Models.FollowersResponse>(req);
+            return Get<Models.FollowersResponse>(OWN_FOLLOWERS, page, count);
         }
 
         public Models.FollowersResponse GetUserFollowers(string screenName)
@@ -33,8 +33,7 @@ namespace CSharp.Geeklist.Api.Impl
 
         public Models.FollowersResponse GetUserFollowers(string screenName, int page, int count)
         {
-            var req = GetRequest(new Uri(string.Format(FORING_FOLLOWERS, screenName)), page, count).ExecuteRequest().Result;
-            return JsonConvert.DeserializeObject<Models.FollowersResponse>(req);
+            return Get<Models.FollowersResponse>(string.Format(FORING_FOLLOWERS, screenName), page, count);
         }
 
         public bool StartFollowing(string userId)
@@ -54,8 +53,7 @@ namespace CSharp.Geeklist.Api.Impl
 
         public async Task<Models.FollowersResponse> GetUserFollowersAsync(int page, int count)
         {
-            var req = await GetRequest(new Uri(OWN_FOLLOWERS), page, count).ExecuteRequest();
-            return await JsonConvert.DeserializeObjectAsync<Models.FollowersResponse>(req);
+            return await GetAsync<Models.FollowersResponse>(OWN_FOLLOWERS, page, count);
         }
 
         public async Task<Models.FollowersResponse> GetUserFollowersAsync(string screenName)
@@ -65,8 +63,7 @@ namespace CSharp.Geeklist.Api.Impl
 
         public async Task<Models.FollowersResponse> GetUserFollowersAsync(string screenName, int page, int count)
         {
-            var req = await GetRequest(new Uri(string.Format(FORING_FOLLOWERS, screenName)), page, count).ExecuteRequest();
-            return await JsonConvert.DeserializeObjectAsync<Models.FollowersResponse>(req);
+            return await GetAsync<Models.FollowersResponse>(string.Format(FORING_FOLLOWERS, screenName), page, count);
         }
 
         public async Task<bool> StartFollowingAsync(string userId)

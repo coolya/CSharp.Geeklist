@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading;
 using Chq.OAuth;
 using Chq.OAuth.Credentials;
-using CSharp.Geeklist.Metro.Api.Impl.OAuth;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Windows.Security.Authentication.Web;
 

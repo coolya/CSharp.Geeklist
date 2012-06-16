@@ -17,26 +17,22 @@ namespace CSharp.Geeklist.Api.Impl
 
         public Models.UserResponse GetUser()
         {
-            var response = this.GetRequest(new Uri(USERURI), 1, 10).ExecuteRequest().Result;
-            return JsonConvert.DeserializeObject<Models.UserResponse>(response);            
+            return Get<Models.UserResponse>(USERURI);            
         }
 
         public Models.UserResponse GetUser(string screenName)
         {
-            var response = this.GetRequest(new Uri(string.Format(FORINGUSERURI, screenName)), 1, 10).ExecuteRequest().Result;
-            return JsonConvert.DeserializeObject<Models.UserResponse>(response); 
+            return Get<Models.UserResponse>(string.Format(FORINGUSERURI, screenName));
         }
 
         public async Task<Models.UserResponse> GetUserAsync()
         {
-            var response = await this.GetRequest(new Uri(string.Format(USERURI)), 1, 10).ExecuteRequest();
-            return await JsonConvert.DeserializeObjectAsync<Models.UserResponse>(response); 
+            return await GetAsync<Models.UserResponse>(USERURI);
         }
 
         public async Task<Models.UserResponse> GetUserAsync(string screenName)
         {
-            var response = await this.GetRequest(new Uri(string.Format(FORINGUSERURI, screenName)), 1, 10).ExecuteRequest();
-            return await JsonConvert.DeserializeObjectAsync<Models.UserResponse>(response); 
+            return await GetAsync<Models.UserResponse>(string.Format(FORINGUSERURI, screenName));
         }
     }
 }
