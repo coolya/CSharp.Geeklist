@@ -12,7 +12,11 @@ namespace CSharp.Geeklist.Api.Impl
 {
     class OAuthAwareOperation
     {
+#if SANDBOX
         protected const string API_ROOT = "http://sandbox-api.geekli.st/v1/";
+#else
+        protected const string API_ROOT = "http://api.geekli.st/v1/";
+#endif
         Client client;
 
         public OAuthAwareOperation(Client client)
@@ -35,26 +39,15 @@ namespace CSharp.Geeklist.Api.Impl
                    .Sign(client.AccessToken.Secret);
         }
 
-        private OAuthRequest GetRequest(Uri uri, int page, int count, object parameter)
+        private OAuthRequest GetRequest(Uri uri,  object parameter)
         {
-            var combinesParams = parameter;
-
-            if (parameter != null)
-            {    
-
-                foreach (var propertery in parameter.GetType().GetTypeInfo().DeclaredProperties)
-                {
-
-                }
-            }
-
             return client.MakeRequest("GET")
-                   .ForResource(client.AccessToken.Token, uri)
-                   .WithParameters(combinesParams)
-                   .Sign(client.AccessToken.Secret);
+                    .ForResource(client.AccessToken.Token, uri)
+                    .WithParameters(parameter)
+                    .Sign(client.AccessToken.Secret);
         }
 
-        protected OAuthRequest PostRequest(Uri uri, string data)
+        private OAuthRequest PostRequest(Uri uri, string data)
         {
             return client.MakeRequest("POST")
                 .WithData(data)
@@ -62,9 +55,23 @@ namespace CSharp.Geeklist.Api.Impl
                 .Sign(client.AccessToken.Secret);
         }
 
+        private OAuthRequest PostRequest(Uri uri, object parameters)
+        {
+            return client.MakeRequest("POST")
+                .WithParameters(parameters)
+                .ForResource(client.AccessToken.Token, uri)
+                .Sign(client.AccessToken.Secret);
+        }
+
         protected T Get<T>(string uri)
         {
             var req = GetRequest(new Uri(uri)).ExecuteRequest().Result;
+            return JsonConvert.DeserializeObject<T>(req);
+        }
+
+        protected T Get<T>(string uri, object parameters)
+        {
+            var req = GetRequest(new Uri(uri), parameters).ExecuteRequest().Result;
             return JsonConvert.DeserializeObject<T>(req);
         }
 
@@ -84,6 +91,44 @@ namespace CSharp.Geeklist.Api.Impl
         {
             var req = await GetRequest(new Uri(uri), page, count).ExecuteRequest();
             return await JsonConvert.DeserializeObjectAsync<T>(req);
+        }
+
+        protected async Task<T> GetAsync<T>(string uri, object parameters)
+        {
+            var req = await GetRequest(new Uri(uri), parameters).ExecuteRequest();
+            return await JsonConvert.DeserializeObjectAsync<T>(req);
+        }
+
+        protected T Post<T>(string uri)
+        {
+        }
+
+        protected T Post<T>(string uri, object parameters)
+        {
+        }
+
+        protected void Post(string uri)
+        {
+        }
+
+        protected void Post(string uri, object parameters)
+        {
+        }
+
+        protected async Task<T> PostAsync<T>(string uri)
+        {
+        }
+
+        protected async Task<T> PostAsync<T>(string uri, object parameters)
+        {
+        }
+
+        protected async Task PostAsync(string uri)
+        {
+        }
+
+        protected async Task PostAsync(string uri, object parameters
+        {
         }
 
     }
