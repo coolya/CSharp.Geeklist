@@ -63,6 +63,14 @@ namespace CSharp.Geeklist.Api.Impl
                 .Sign(client.AccessToken.Secret);
         }
 
+        
+        private OAuthRequest PostRequest(Uri uri)
+        {
+            return client.MakeRequest("POST")
+                .ForResource(client.AccessToken.Token, uri)
+                .Sign(client.AccessToken.Secret);
+        }
+
         protected T Get<T>(string uri)
         {
             var req = GetRequest(new Uri(uri)).ExecuteRequest().Result;
@@ -101,34 +109,46 @@ namespace CSharp.Geeklist.Api.Impl
 
         protected T Post<T>(string uri)
         {
+            var req = PostRequest(new Uri(uri)).ExecuteRequest().Result;
+            return JsonConvert.DeserializeObject<T>(req);
         }
 
         protected T Post<T>(string uri, object parameters)
         {
+            var req = PostRequest(new Uri(uri), parameters).ExecuteRequest().Result;
+            return JsonConvert.DeserializeObject<T>(req);
         }
 
         protected void Post(string uri)
-        {
+        {   //result is irgnores, the request will throw an exception in cause of it fails
+            var req = PostRequest(new Uri(uri)).ExecuteRequest().Result;
         }
 
         protected void Post(string uri, object parameters)
-        {
+        {   //result is irgnores, the request will throw an exception in cause of it fails
+            var req = PostRequest(new Uri(uri), parameters).ExecuteRequest().Result;
         }
 
         protected async Task<T> PostAsync<T>(string uri)
         {
+            var req = await PostRequest(new Uri(uri)).ExecuteRequest();
+            return await JsonConvert.DeserializeObjectAsync<T>(req);
         }
 
         protected async Task<T> PostAsync<T>(string uri, object parameters)
         {
+            var req = await PostRequest(new Uri(uri), parameters).ExecuteRequest();
+            return await JsonConvert.DeserializeObjectAsync<T>(req);
         }
 
         protected async Task PostAsync(string uri)
         {
+            var req = await PostRequest(new Uri(uri)).ExecuteRequest();
         }
 
-        protected async Task PostAsync(string uri, object parameters
+        protected async Task PostAsync(string uri, object parameters)
         {
+            var req = await PostRequest(new Uri(uri), parameters).ExecuteRequest();
         }
 
     }

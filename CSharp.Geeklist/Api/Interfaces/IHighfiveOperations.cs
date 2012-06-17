@@ -35,7 +35,7 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// <param name="type">The type of item to highfive.</param>
 		/// <param name="itemId">The id of the item to be highfived.</param>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		bool Highfive(HighfiveType type, string itemId);
+		void Highfive(HighfiveType type, string itemId);
 
 		/// <summary>
 		/// Asynchronously highfives the specified card or micro
@@ -43,6 +43,6 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// <param name="type">The type of item to highfive.</param>
 		/// <param name="itemId">The id of the item to be highfived.</param>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<bool> HighfiveAsync(HighfiveType type, string itemId);
+		Task HighfiveAsync(HighfiveType type, string itemId);
 	}
 }

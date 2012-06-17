@@ -13,6 +13,7 @@ namespace CSharp.Geeklist.Api.Impl
 
         const string OWN_FOLLOWERS = API_ROOT + "user/followers";
         const string FORING_FOLLOWERS = API_ROOT + "users/:{0}/followers";
+        const string UN_FOLLOW = API_ROOT + "user/follow";
 
         public FollowerOperations(Client client) : base(client) {}
 
@@ -36,14 +37,14 @@ namespace CSharp.Geeklist.Api.Impl
             return Get<Models.FollowersResponse>(string.Format(FORING_FOLLOWERS, screenName), page, count);
         }
 
-        public bool StartFollowing(string userId)
+        public void StartFollowing(string userId)
         {
-            throw new NotImplementedException();
+            Post(UN_FOLLOW, new { user = userId, action = "follow" });
         }
 
-        public bool StopFollowing(string userId)
+        public void StopFollowing(string userId)
         {
-            throw new NotImplementedException();
+            Post(UN_FOLLOW, new { user = userId });
         }
 
         public async Task<Models.FollowersResponse> GetUserFollowersAsync()
@@ -66,14 +67,14 @@ namespace CSharp.Geeklist.Api.Impl
             return await GetAsync<Models.FollowersResponse>(string.Format(FORING_FOLLOWERS, screenName), page, count);
         }
 
-        public async Task<bool> StartFollowingAsync(string userId)
+        public async Task StartFollowingAsync(string userId)
         {
-            throw new NotImplementedException();
+            await PostAsync(UN_FOLLOW, new { user = userId, action = "follow" });
         }
 
-        public async Task<bool> StopFollowingAsync(string userId)
+        public async Task StopFollowingAsync(string userId)
         {
-            throw new NotImplementedException();
+            await PostAsync(UN_FOLLOW, new { user = userId });
         }
     }
 }

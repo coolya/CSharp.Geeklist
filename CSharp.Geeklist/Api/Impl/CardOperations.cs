@@ -14,6 +14,7 @@ namespace CSharp.Geeklist.Api.Impl
         const string OWN_CARDS = API_ROOT + "user/cards";
         const string FORING_CARDS = API_ROOT + "users/:{0}/cards";
         const string SINGLE_CARD = API_ROOT + "cards/:{0}";
+        const string CREATE_CARD = API_ROOT + "cards";
 
         public CardOperations(Client client) : base(client) {}
 
@@ -44,7 +45,7 @@ namespace CSharp.Geeklist.Api.Impl
 
         public Models.CardResponse CreateCard(string headline)
         {
-            throw new NotImplementedException();
+            return Post<Models.CardResponse>(CREATE_CARD, new { headline = headline });
         }
 
         public async  Task<Models.CardsResponse> GetUserCardsAsync()
@@ -74,7 +75,7 @@ namespace CSharp.Geeklist.Api.Impl
 
         public async Task<Models.CardResponse> CreateCardAsync(string headline)
         {
-            throw new NotImplementedException();
+            return await PostAsync<Models.CardResponse>(CREATE_CARD, new { headline = headline });
         }
     }
 }

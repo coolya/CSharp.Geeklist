@@ -74,14 +74,14 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// </summary>
 		/// <param name="userId">The id of the user to start following.</param>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		bool StartFollowing(string userId);
+		void StartFollowing(string userId);
 
 		/// <summary>
 		/// Stop following the given user
 		/// </summary>
 		/// <param name="userId">The id of the user to stop following.</param>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		bool StopFollowing(string userId);
+		void StopFollowing(string userId);
 
 		/// <summary>
 		/// Asynchronously retrieves the first 10 followers of the authenticated user.
@@ -128,13 +128,13 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// </summary>
 		/// <param name="userId">The id of the user to start following.</param>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<bool> StartFollowingAsync(string userId);
+		Task StartFollowingAsync(string userId);
 
 		/// <summary>
 		/// Asynchronously stop following the given user
 		/// </summary>
 		/// <param name="userId">The id of the user to stop following.</param>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<bool> StopFollowingAsync(string userId);
+		Task StopFollowingAsync(string userId);
 	}
 }

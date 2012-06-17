@@ -9,18 +9,18 @@ namespace CSharp.Geeklist.Api.Impl
 {
     class HighFiveOperations : OAuthAwareOperation, Interfaces.IHighfiveOperations
     {
-        public HighFiveOperations(Client client) : base(client)
-        {
+        const string HIGHFIVE = API_ROOT + "highfive";
 
-        }
-        public bool Highfive(Enums.HighfiveType type, string itemId)
+        public HighFiveOperations(Client client) : base(client) {}
+
+        public void Highfive(Enums.HighfiveType type, string itemId)
         {
-            throw new NotImplementedException();
+            Post(HIGHFIVE, new { type = type.ToString(), gfk = itemId });
         }
 
-        public Task<bool> HighfiveAsync(Enums.HighfiveType type, string itemId)
+        public async Task HighfiveAsync(Enums.HighfiveType type, string itemId)
         {
-            throw new NotImplementedException();
+            await PostAsync(HIGHFIVE, new { type = type.ToString(), gfk = itemId });
         }
     }
 }
