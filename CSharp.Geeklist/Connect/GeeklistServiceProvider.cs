@@ -28,7 +28,7 @@ namespace CSharp.Geeklist.Connect
 	/// Geeklist <see cref="IServiceProvider"/> implementation.
     /// </summary>
     /// <author>Scott Smith</author>
-	public class GeeklistServiceProvider    //: AbstractOAuth1ServiceProvider<IGeeklist>
+	public class GeeklistServiceProvider   : IGeeklist
     {
         /// <summary>
 		/// Creates a new instance of <see cref="GeeklistServiceProvider"/>.
