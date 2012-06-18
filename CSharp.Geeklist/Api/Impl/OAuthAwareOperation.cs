@@ -73,82 +73,181 @@ namespace CSharp.Geeklist.Api.Impl
 
         protected T Get<T>(string uri)
         {
-            var req = GetRequest(new Uri(uri)).ExecuteRequest().Result;
-            return JsonConvert.DeserializeObject<T>(req);
+            try
+            {
+                var req = GetRequest(new Uri(uri)).ExecuteRequest().Result;
+                return JsonConvert.DeserializeObject<T>(req);
+            }
+            catch (Exception ex)
+            {
+                throw new GeeklistApiException("Get request failed", ex);
+            }
+
         }
 
         protected T Get<T>(string uri, object parameters)
         {
-            var req = GetRequest(new Uri(uri), parameters).ExecuteRequest().Result;
-            return JsonConvert.DeserializeObject<T>(req);
+            try
+            {
+                var req = GetRequest(new Uri(uri), parameters).ExecuteRequest().Result;
+                return JsonConvert.DeserializeObject<T>(req);
+            }
+            catch (Exception ex)
+            {
+                throw new GeeklistApiException("Get request failed", ex);
+            }
         }
 
         protected T Get<T>(string uri, int page, int count)
         {
-            var req = GetRequest(new Uri(uri), page, count).ExecuteRequest().Result;
-            return JsonConvert.DeserializeObject<T>(req);
+            try
+            {
+                var req = GetRequest(new Uri(uri), page, count).ExecuteRequest().Result;
+                return JsonConvert.DeserializeObject<T>(req);
+            }
+            catch (Exception ex)
+            {
+                throw new GeeklistApiException("Get request failed", ex);
+            }
         }
 
         protected async Task<T> GetAsync<T>(string uri)
         {
-            var req = await GetRequest(new Uri(uri)).ExecuteRequest();
-            return await JsonConvert.DeserializeObjectAsync<T>(req);
+            try
+            {
+                var req = await GetRequest(new Uri(uri)).ExecuteRequest();
+                return await JsonConvert.DeserializeObjectAsync<T>(req);
+            }
+            catch (Exception ex)
+            {
+                throw new GeeklistApiException("Get request failed", ex);
+            }
         }
 
         protected async Task<T> GetAsync<T>(string uri, int page, int count)
         {
-            var req = await GetRequest(new Uri(uri), page, count).ExecuteRequest();
-            return await JsonConvert.DeserializeObjectAsync<T>(req);
+            try
+            {
+                var req = await GetRequest(new Uri(uri), page, count).ExecuteRequest();
+                return await JsonConvert.DeserializeObjectAsync<T>(req);
+            }
+            catch (Exception ex)
+            {
+                throw new GeeklistApiException("Get request failed", ex);
+            }
         }
 
         protected async Task<T> GetAsync<T>(string uri, object parameters)
         {
-            var req = await GetRequest(new Uri(uri), parameters).ExecuteRequest();
-            return await JsonConvert.DeserializeObjectAsync<T>(req);
+            try
+            {
+                var req = await GetRequest(new Uri(uri), parameters).ExecuteRequest();
+                return await JsonConvert.DeserializeObjectAsync<T>(req);
+            }
+            catch (Exception ex)
+            {
+                throw new GeeklistApiException("Get request failed", ex);
+            }
         }
 
         protected T Post<T>(string uri)
         {
-            var req = PostRequest(new Uri(uri)).ExecuteRequest().Result;
-            return JsonConvert.DeserializeObject<T>(req);
+            try
+            {
+                var req = PostRequest(new Uri(uri)).ExecuteRequest().Result;
+                return JsonConvert.DeserializeObject<T>(req);
+            }
+            catch (Exception ex)
+            {
+                throw new GeeklistApiException("Post request failed", ex);
+            }
         }
 
         protected T Post<T>(string uri, object parameters)
         {
-            var req = PostRequest(new Uri(uri), parameters).ExecuteRequest().Result;
-            return JsonConvert.DeserializeObject<T>(req);
+            try
+            {
+                var req = PostRequest(new Uri(uri), parameters).ExecuteRequest().Result;
+                return JsonConvert.DeserializeObject<T>(req);
+            }
+            catch (Exception ex)
+            {
+                throw new GeeklistApiException("Post request failed", ex);
+            }
         }
 
         protected void Post(string uri)
         {   //result is irgnores, the request will throw an exception in cause of it fails
-            var req = PostRequest(new Uri(uri)).ExecuteRequest().Result;
+            try
+            {
+                var req = PostRequest(new Uri(uri)).ExecuteRequest().Result;
+            }
+            catch (Exception ex)
+            {
+                throw new GeeklistApiException("Post request failed", ex);
+            }
         }
 
         protected void Post(string uri, object parameters)
         {   //result is irgnores, the request will throw an exception in cause of it fails
-            var req = PostRequest(new Uri(uri), parameters).ExecuteRequest().Result;
+            try
+            {
+                var req = PostRequest(new Uri(uri), parameters).ExecuteRequest().Result;
+            }
+            catch (Exception ex)
+            {
+                throw new GeeklistApiException("Post request failed", ex);
+            }
         }
 
         protected async Task<T> PostAsync<T>(string uri)
         {
-            var req = await PostRequest(new Uri(uri)).ExecuteRequest();
-            return await JsonConvert.DeserializeObjectAsync<T>(req);
+            try
+            {
+                var req = await PostRequest(new Uri(uri)).ExecuteRequest();
+                return await JsonConvert.DeserializeObjectAsync<T>(req);
+            }
+            catch (Exception ex)
+            {
+                throw new GeeklistApiException("Post request failed", ex);
+            }
         }
 
         protected async Task<T> PostAsync<T>(string uri, object parameters)
         {
-            var req = await PostRequest(new Uri(uri), parameters).ExecuteRequest();
-            return await JsonConvert.DeserializeObjectAsync<T>(req);
+            try
+            {
+                var req = await PostRequest(new Uri(uri), parameters).ExecuteRequest();
+                return await JsonConvert.DeserializeObjectAsync<T>(req);
+            }
+            catch (Exception ex)
+            {
+                throw new GeeklistApiException("Post request failed", ex);
+            }
         }
 
         protected async Task PostAsync(string uri)
         {
-            var req = await PostRequest(new Uri(uri)).ExecuteRequest();
+            try
+            {
+                var req = await PostRequest(new Uri(uri)).ExecuteRequest();
+            }
+            catch (Exception ex)
+            {
+                throw new GeeklistApiException("Post request failed", ex);
+            }
         }
 
         protected async Task PostAsync(string uri, object parameters)
         {
-            var req = await PostRequest(new Uri(uri), parameters).ExecuteRequest();
+            try
+            {
+                var req = await PostRequest(new Uri(uri), parameters).ExecuteRequest();
+            }
+            catch (Exception ex)
+            {
+                throw new GeeklistApiException("Post request failed", ex);
+            }
         }
 
     }
