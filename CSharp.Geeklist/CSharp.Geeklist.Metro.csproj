@@ -107,6 +107,7 @@
     <Compile Include="Api\Impl\CardOperations.cs" />
     <Compile Include="Api\Impl\FollowerOperations.cs" />
     <Compile Include="Api\Impl\FollowingOperations.cs" />
+    <Compile Include="Api\Impl\GeeklistApi.cs" />
     <Compile Include="Api\Impl\HighFiveOperations.cs" />
     <Compile Include="Api\Impl\MicroOperations.cs" />
     <Compile Include="Api\Impl\OAuthAwareOperation.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Api\Interfaces\IHighfiveOperations.cs" />
     <Compile Include="Api\Interfaces\IMicroOperations.cs" />
     <Compile Include="Api\Interfaces\IUserOperations.cs" />
+    <Compile Include="Api\Models\AccessTokenContainer.cs" />
     <Compile Include="Api\Models\ActivitiesResponse.cs" />
     <Compile Include="Api\Models\Activity.cs" />
     <Compile Include="Api\Models\Avatar.cs" />

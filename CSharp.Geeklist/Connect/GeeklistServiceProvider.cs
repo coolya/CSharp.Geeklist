@@ -19,7 +19,10 @@
 #endregion
 
 using System;
+using Chq.OAuth;
+using Chq.OAuth.Credentials;
 using CSharp.Geeklist.Api.Interfaces;
+using CSharp.Geeklist.Api.Models;
 
 
 namespace CSharp.Geeklist.Connect
@@ -28,30 +31,54 @@ namespace CSharp.Geeklist.Connect
 	/// Geeklist <see cref="IServiceProvider"/> implementation.
     /// </summary>
     /// <author>Scott Smith</author>
-	public class GeeklistServiceProvider   : IGeeklist
+	public class GeeklistServiceProvider
     {
+        Client client;
+
+#if SANDBOX
+        const string REQUEST_TOKEN_URI = "http://sandbox-api.geekli.st/v1/oauth/request_token";
+        const string AUTHORIZE_URI = "http://sandbox.geekli.st/oauth/authorize";
+        const string ACCESS_TOKEN_URI = "http://sandbox-api.geekli.st/v1/oauth/access_token";
+#else
+        const string REQUEST_TOKEN_URI = "http://api.geekli.st/v1/oauth/request_token";
+        const string AUTHORIZE_URI = "http://geekli.st/oauth/authorize";
+        const string ACCESS_TOKEN_URI = "http://api.geekli.st/v1/oauth/access_token";
+#endif
         /// <summary>
 		/// Creates a new instance of <see cref="GeeklistServiceProvider"/>.
         /// </summary>
         /// <param name="consumerKey">The application's API key.</param>
         /// <param name="consumerSecret">The application's API secret.</param>
 		public GeeklistServiceProvider(string consumerKey, string consumerSecret)
-            //: base(consumerKey, consumerSecret, new OAuth1Template(consumerKey, consumerSecret,
-				//"http://sandbox-api.geekli.st/v1/oauth/request_token",
-		//		"http://sandbox.geekli.st/oauth/authorize",
-			//	"http://sandbox-api.geekli.st/v1/oauth/access_token"))
         {
-			//TODO: Change the Urls to the live version of Geeklist's API
+            var context = new OAuthContext(consumerKey,consumerSecret,
+                REQUEST_TOKEN_URI,
+                AUTHORIZE_URI,
+                ACCESS_TOKEN_URI);
+
+            client = new Client(context);
+
+            
+            var requestTokenResponse = client.MakeRequest("GET")
+            .ForRequestToken()
+            .Sign()
+            .ExecuteRequest().Result;
+
+            client.RequestToken = TokenContainer.Parse(requestTokenResponse);
         }
 
-        ///// <summary>
-        ///// Returns an API interface allowing the client application to access unprotected resources.
-        ///// </summary>
-        ///// <returns>A binding to the service provider's API.</returns>
-        //public IGeeklist GetAPi()
-        //{
-        //    //return new GeeklistTemplate();
-        //}
+        public Uri GetAuthorizationUri
+        {
+            get { return client.GetAuthorizationUri(); }
+        }
+
+        public AccessTokenContainer ParseAccessResponse(string data)
+        {
+            var token = TokenContainer.Parse(data);
+
+            return new AccessTokenContainer(token.Token, token.Secret);
+        }
+
 
         ///// <summary>
         ///// Returns an API interface allowing the client application to access protected resources on behalf of a user.
@@ -59,9 +86,22 @@ namespace CSharp.Geeklist.Connect
         ///// <param name="accessToken">The API access token.</param>
         ///// <param name="secret">The access token secret.</param>
         ///// <returns>A binding to the service provider's API.</returns>
-        //public override IGeeklist GetApi(string accessToken, string secret)
-        //{
-        //    return new GeeklistTemplate(ConsumerKey, ConsumerSecret, accessToken, secret);
-        //}
+        public IGeeklist GetApi(string accessToken, string secret)
+        {
+            client.AccessToken = new TokenContainer() { Token = accessToken, Secret = secret };
+
+            return new Geeklist.Api.Impl.GeeklistApi(client);
+        }
+
+        ///// <summary>
+        ///// Returns an API interface allowing the client application to access protected resources on behalf of a user.
+        ///// </summary>
+        ///// <param name="accessToken">The API access token.</param>
+        ///// <param name="secret">The access token secret.</param>
+        ///// <returns>A binding to the service provider's API.</returns>
+        public IGeeklist GetApi(AccessTokenContainer container)
+        {
+            return GetApi(container.Token, container.Secret);
+        }
     }
 }
