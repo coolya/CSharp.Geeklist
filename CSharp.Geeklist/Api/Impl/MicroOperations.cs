@@ -13,77 +13,78 @@ namespace CSharp.Geeklist.Api.Impl
         const string OWN_MICROS = API_ROOT + "user/micros";
         const string FORING_MICROWS = API_ROOT + "users/{0}/micros";
         const string SINGLE_MICRO = API_ROOT + "micros/:{0}";
+        const string CREATE_MICRO = API_ROOT + "micros";
 
         public MicroOperations(Client client) : base(client) {}
 
         public Models.MicrosResponse GetUserMicros()
         {
-            throw new NotImplementedException();
+            return GetUserMicros(10, 1);
         }
 
         public Models.MicrosResponse GetUserMicros(int page, int count)
         {
-            throw new NotImplementedException();
+           return  Get<Models.MicrosResponse>(OWN_MICROS, page, count);
         }
 
         public Models.MicrosResponse GetUserMicros(string screenName)
         {
-            throw new NotImplementedException();
+            return GetUserMicros(screenName, 1, 10);
         }
 
         public Models.MicrosResponse GetUserMicros(string screenName, int page, int count)
         {
-            throw new NotImplementedException();
+            return Get<Models.MicrosResponse>(string.Format(FORING_MICROWS, screenName), page, count);
         }
 
         public Models.MicroResponse GetMicro(string microId)
         {
-            throw new NotImplementedException();
+            return Get<Models.MicroResponse>(string.Format(SINGLE_MICRO, microId));
         }
 
         public Models.MicroResponse CreateMicro(string status)
         {
-            throw new NotImplementedException();
+            return Post<Models.MicroResponse>(CREATE_MICRO, new { status = status });
         }
 
         public Models.MicroResponse CreateMicro(string status, string type, string itemId)
         {
-            throw new NotImplementedException();
+            return Post<Models.MicroResponse>(CREATE_MICRO, new { status = status, type = type, in_reply_to = itemId });
         }
 
-        public Task<Models.MicrosResponse> GetUserMicrosAsync()
+        public async Task<Models.MicrosResponse> GetUserMicrosAsync()
         {
-            throw new NotImplementedException();
+            return await GetUserMicrosAsync(1, 10);
         }
 
-        public Task<Models.MicrosResponse> GetUserMicrosAsync(int page, int count)
+        public async Task<Models.MicrosResponse> GetUserMicrosAsync(int page, int count)
         {
-            throw new NotImplementedException();
+            return await GetAsync<Models.MicrosResponse>(OWN_MICROS, page, count);
         }
 
-        public Task<Models.MicrosResponse> GetUserMicrosAsync(string screenName)
+        public async Task<Models.MicrosResponse> GetUserMicrosAsync(string screenName)
         {
-            throw new NotImplementedException();
+            return await GetUserMicrosAsync(screenName, 1, 10);
         }
 
-        public Task<Models.MicrosResponse> GetUserMicrosAsync(string screenName, int page, int count)
+        public async Task<Models.MicrosResponse> GetUserMicrosAsync(string screenName, int page, int count)
         {
-            throw new NotImplementedException();
+            return await GetAsync<Models.MicrosResponse>(string.Format(FORING_MICROWS, screenName), page, count);
         }
 
-        public Task<Models.MicroResponse> GetMicroAsync(string microId)
+        public async Task<Models.MicroResponse> GetMicroAsync(string microId)
         {
-            throw new NotImplementedException();
+            return await GetAsync<Models.MicroResponse>(string.Format(SINGLE_MICRO, microId));
         }
 
-        public Task<Models.MicroResponse> CreateMicroAsync(string status)
+        public async Task<Models.MicroResponse> CreateMicroAsync(string status)
         {
-            throw new NotImplementedException();
+            return await PostAsync<Models.MicroResponse>(CREATE_MICRO, new { status = status });
         }
 
-        public Task<Models.MicroResponse> CreateMicroAsync(string status, string type, string itemId)
+        public async Task<Models.MicroResponse> CreateMicroAsync(string status, string type, string itemId)
         {
-            throw new NotImplementedException();
+            return await PostAsync<Models.MicroResponse>(CREATE_MICRO, new { status = status, type = type, in_reply_to = itemId });
         }
     }
 }
