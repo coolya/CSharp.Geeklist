@@ -14,7 +14,7 @@ namespace CSharp.Geeklist.Test
     public class UnitTest1
     {
         Mutex mutex = new Mutex();
-        [TestMethod]
+       // [TestMethod]
         public void TestMethod1()
         {
             //var oauth = new OAuthBroker("http://sandbox-api.geekli.st/v1/oauth/access_token",
