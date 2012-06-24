@@ -27,8 +27,8 @@ namespace CSharp.Geeklist.Test
         [TestMethod]
         public void CreateMicroTest2()
         {
-            var rekatzMicro = _ops.GetUserMicros("rekatz").MicrosDetails.Micros[0];
-            var res = _ops.CreateMicro("Test" + Guid.NewGuid(), rekatzMicro.Type, rekatzMicro.Id);
+            var rekatzMicro = _ops.CreateMicro("Test" + Guid.NewGuid());
+            var res = _ops.CreateMicro("Test" + Guid.NewGuid(), rekatzMicro.Micro.Type, rekatzMicro.Micro.Id);
             Assert.IsNotNull(res);
         }
 
@@ -36,15 +36,14 @@ namespace CSharp.Geeklist.Test
         public void CreateMicroAsyncTest()
         {
             var res = _ops.CreateMicroAsync("Test" + Guid.NewGuid());
-
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void CreateMicroAsyncTest2()
         {
-            var rekatzMicro = _ops.GetUserMicros("rekatz").MicrosDetails.Micros[0];
-            var res = _ops.CreateMicroAsync("Test" + Guid.NewGuid(), rekatzMicro.Type, rekatzMicro.Id);
+            var rekatzMicro = _ops.CreateMicro("Test" + Guid.NewGuid());
+            var res = _ops.CreateMicroAsync("Test" + Guid.NewGuid(), rekatzMicro.Micro.Type, rekatzMicro.Micro.Id);
             Assert.IsNotNull(res.Result);
         }
 

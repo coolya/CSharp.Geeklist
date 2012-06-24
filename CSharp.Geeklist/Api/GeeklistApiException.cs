@@ -31,6 +31,7 @@ namespace CSharp.Geeklist.Api
     public class GeeklistApiException : Exception
     {
         private readonly GeeklistApiError _error;
+        private readonly string _serverResponse;
 
         /// <summary>
         /// Gets the Geeklist error.
@@ -39,6 +40,12 @@ namespace CSharp.Geeklist.Api
         {
             get { return _error; }
         }
+
+        public string ServerResponse
+        {
+            get { return _serverResponse; }
+        }
+            
 
         /// <summary>
         /// Creates a new instance of the <see cref="GeeklistApiException"/> class.
@@ -56,10 +63,11 @@ namespace CSharp.Geeklist.Api
         /// </summary>
         /// <param name="message">A message about the exception.</param>
         /// <param name="innerException">The inner exception that is the cause of the current exception.</param>
-        public GeeklistApiException(string message, Exception innerException)
+        public GeeklistApiException(string message, string serverResponse, Exception innerException)
             : base(message, innerException)
         {
             _error = GeeklistApiError.ServerError;
+            _serverResponse = serverResponse;
         }
     }
 }

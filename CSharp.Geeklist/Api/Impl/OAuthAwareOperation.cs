@@ -80,7 +80,8 @@ namespace CSharp.Geeklist.Api.Impl
             }
             catch (Exception ex)
             {
-                throw new GeeklistApiException("Get request failed", ex);
+                var msg = GetMessageFromException(ex);
+                throw new GeeklistApiException("Get request failed", msg, ex);
             }
 
         }
@@ -94,7 +95,8 @@ namespace CSharp.Geeklist.Api.Impl
             }
             catch (Exception ex)
             {
-                throw new GeeklistApiException("Get request failed", ex);
+                var msg = GetMessageFromException(ex);
+                throw new GeeklistApiException("Get request failed", msg, ex);
             }
         }
 
@@ -107,7 +109,8 @@ namespace CSharp.Geeklist.Api.Impl
             }
             catch (Exception ex)
             {
-                throw new GeeklistApiException("Get request failed", ex);
+                var msg = GetMessageFromException(ex);
+                throw new GeeklistApiException("Get request failed", msg, ex);
             }
         }
 
@@ -120,7 +123,8 @@ namespace CSharp.Geeklist.Api.Impl
             }
             catch (Exception ex)
             {
-                throw new GeeklistApiException("Get request failed", ex);
+                var msg = GetMessageFromException(ex);
+                throw new GeeklistApiException("Get request failed", msg, ex);
             }
         }
 
@@ -133,7 +137,8 @@ namespace CSharp.Geeklist.Api.Impl
             }
             catch (Exception ex)
             {
-                throw new GeeklistApiException("Get request failed", ex);
+                var msg = GetMessageFromException(ex);
+                throw new GeeklistApiException("Get request failed", msg, ex);
             }
         }
 
@@ -146,7 +151,8 @@ namespace CSharp.Geeklist.Api.Impl
             }
             catch (Exception ex)
             {
-                throw new GeeklistApiException("Get request failed", ex);
+                var msg = GetMessageFromException(ex);
+                throw new GeeklistApiException("Get request failed", msg,  ex);
             }
         }
 
@@ -159,7 +165,8 @@ namespace CSharp.Geeklist.Api.Impl
             }
             catch (Exception ex)
             {
-                throw new GeeklistApiException("Post request failed", ex);
+                var msg = GetMessageFromException(ex);
+                throw new GeeklistApiException("Post request failed", msg, ex);
             }
         }
 
@@ -173,8 +180,7 @@ namespace CSharp.Geeklist.Api.Impl
             catch (Exception ex)
             {
                 var msg = GetMessageFromException(ex);
-                
-                throw new GeeklistApiException("Post request failed", ex);
+                throw new GeeklistApiException("Post request failed", msg, ex);     
             }
         }
 
@@ -208,7 +214,8 @@ namespace CSharp.Geeklist.Api.Impl
             }
             catch (Exception ex)
             {
-                throw new GeeklistApiException("Post request failed", ex);
+                var msg = GetMessageFromException(ex);
+                throw new GeeklistApiException("Post request failed", msg, ex);
             }
         }
 
@@ -220,7 +227,8 @@ namespace CSharp.Geeklist.Api.Impl
             }
             catch (Exception ex)
             {
-                throw new GeeklistApiException("Post request failed", ex);
+                var msg = GetMessageFromException(ex);
+                throw new GeeklistApiException("Post request failed", msg, ex);
             }
         }
 
@@ -233,7 +241,8 @@ namespace CSharp.Geeklist.Api.Impl
             }
             catch (Exception ex)
             {
-                throw new GeeklistApiException("Post request failed", ex);
+                var msg = GetMessageFromException(ex);
+                throw new GeeklistApiException("Post request failed", msg, ex);
             }
         }
 
@@ -246,7 +255,8 @@ namespace CSharp.Geeklist.Api.Impl
             }
             catch (Exception ex)
             {
-                throw new GeeklistApiException("Post request failed", ex);
+                var msg = GetMessageFromException(ex);
+                throw new GeeklistApiException("Post request failed", msg, ex);
             }
         }
 
@@ -258,7 +268,8 @@ namespace CSharp.Geeklist.Api.Impl
             }
             catch (Exception ex)
             {
-                throw new GeeklistApiException("Post request failed", ex);
+                var msg = GetMessageFromException(ex);
+                throw new GeeklistApiException("Post request failed", msg, ex);
             }
         }
 
@@ -270,7 +281,8 @@ namespace CSharp.Geeklist.Api.Impl
             }
             catch (Exception ex)
             {
-                throw new GeeklistApiException("Post request failed", ex);
+                var msg = GetMessageFromException(ex);
+                throw new GeeklistApiException("Post request failed", msg, ex);
             }
         }
 
