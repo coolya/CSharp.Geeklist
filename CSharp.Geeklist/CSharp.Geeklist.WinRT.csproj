@@ -6,26 +6,23 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F3E3CA34-83D8-43B5-B77E-AFA7248258C1}</ProjectGuid>
+    <ProjectGuid>{F96F6D38-D339-4392-9D59-D4C1F9D18FD5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CSharp.Geeklist.Test</RootNamespace>
-    <AssemblyName>CSharp.Geeklist.Test</AssemblyName>
+    <RootNamespace>CSharp.Geeklist</RootNamespace>
+    <AssemblyName>CSharp.Geeklist.Metro</AssemblyName>
     <DefaultLanguage>de-DE</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>CSharp.Geeklist.Test_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -101,74 +98,81 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup>
-    <AppXPackage>True</AppXPackage>
-    <AppxPackageIncludePrivateSymbols>true</AppxPackageIncludePrivateSymbols>
-  </PropertyGroup>
   <ItemGroup>
-    <!--A reference to the entire .Net Framework and Windows SDK are automatically included-->
-    <SDKReference Include="MSTestFramework, Version=11.0" />
-    <SDKReference Include="TestPlatform, Version=11.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ActivityTest.cs" />
-    <Compile Include="CardTest.cs" />
-    <Compile Include="FollowerTest.cs" />
-    <Compile Include="FollowingTest.cs" />
-    <Compile Include="GeneralThreadAffineContext.cs" />
-    <Compile Include="MicroTest.cs" />
+    <Compile Include="Api\Enums\Activity.cs" />
+    <Compile Include="Api\Enums\Highfive.cs" />
+    <Compile Include="Api\GeeklistApiError.cs" />
+    <Compile Include="Api\GeeklistApiException.cs" />
+    <Compile Include="Api\Impl\ActivityOperation.cs" />
+    <Compile Include="Api\Impl\CardOperations.cs" />
+    <Compile Include="Api\Impl\FollowerOperations.cs" />
+    <Compile Include="Api\Impl\FollowingOperations.cs" />
+    <Compile Include="Api\Impl\GeeklistApi.cs" />
+    <Compile Include="Api\Impl\HighFiveOperations.cs" />
+    <Compile Include="Api\Impl\MicroOperations.cs" />
+    <Compile Include="Api\Impl\OAuthAwareOperation.cs" />
+    <Compile Include="Api\Impl\UserOperations.cs" />
+    <Compile Include="Api\Interfaces\IActivityOperations.cs" />
+    <Compile Include="Api\Interfaces\ICardOperations.cs" />
+    <Compile Include="Api\Interfaces\IFollowerOperations.cs" />
+    <Compile Include="Api\Interfaces\IFollowingOperations.cs" />
+    <Compile Include="Api\Interfaces\IGeeklist.cs" />
+    <Compile Include="Api\Interfaces\IHighfiveOperations.cs" />
+    <Compile Include="Api\Interfaces\IMicroOperations.cs" />
+    <Compile Include="Api\Interfaces\IUserOperations.cs" />
+    <Compile Include="Api\Models\AccessTokenContainer.cs" />
+    <Compile Include="Api\Models\ActivitiesResponse.cs" />
+    <Compile Include="Api\Models\Activity.cs" />
+    <Compile Include="Api\Models\Avatar.cs" />
+    <Compile Include="Api\Models\Card.cs" />
+    <Compile Include="Api\Models\CardDetails.cs" />
+    <Compile Include="Api\Models\CardResponse.cs" />
+    <Compile Include="Api\Models\CardsResponse.cs" />
+    <Compile Include="Api\Models\Company.cs" />
+    <Compile Include="Api\Models\Criteria.cs" />
+    <Compile Include="Api\Models\FollowersDetails.cs" />
+    <Compile Include="Api\Models\FollowersResponse.cs" />
+    <Compile Include="Api\Models\FollowingDetails.cs" />
+    <Compile Include="Api\Models\FollowingResponse.cs" />
+    <Compile Include="Api\Models\Micro.cs" />
+    <Compile Include="Api\Models\MicroResponse.cs" />
+    <Compile Include="Api\Models\MicrosDetails.cs" />
+    <Compile Include="Api\Models\MicrosResponse.cs" />
+    <Compile Include="Api\Models\Reply.cs" />
+    <Compile Include="Api\Models\ShallowUser.cs" />
+    <Compile Include="Api\Models\ShortCode.cs" />
+    <Compile Include="Api\Models\Social.cs" />
+    <Compile Include="Api\Models\Stats.cs" />
+    <Compile Include="Api\Models\TrendingHistory.cs" />
+    <Compile Include="Api\Models\User.cs" />
+    <Compile Include="Api\Models\UserResponse.cs" />
+    <Compile Include="Api\Models\ViaApp.cs" />
+    <Compile Include="Connect\GeeklistServiceProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AppxManifest Include="Package.appxmanifest">
-      <SubType>Designer</SubType>
-    </AppxManifest>
-    <None Include="CSharp.Geeklist.Test_TemporaryKey.pfx" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Images\UnitTestLogo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\UnitTestSmallLogo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\UnitTestSplashScreen.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\UnitTestStoreLogo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Chq.OAuth, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\Chq.OAuth.dll</HintPath>
+    <Reference Include="Chq.OAuth">
+      <HintPath>..\CSharp.Geeklist.Test\Chq.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\winrt45\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CSharp.Geeklist\CSharp.Geeklist.WinRT.csproj">
-      <Project>{f96f6d38-d339-4392-9d59-d4c1f9d18fd5}</Project>
-      <Name>CSharp.Geeklist.WinRT</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Sandbox|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Sandbox\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE, SANDBOX</DefineConstants>
     <NoStdLib>true</NoStdLib>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Sandbox|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -209,11 +213,14 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
-  </Target>  
+  </Target>
   <Target Name="AfterBuild">
   </Target>
   -->

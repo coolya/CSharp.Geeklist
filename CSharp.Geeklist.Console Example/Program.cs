@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using CSharp.Geeklist.Api;
 using CSharp.Geeklist.Connect;
-using Spring.Social.OAuth1;
 
 namespace CSharp.Geeklist.Console_Example
 {

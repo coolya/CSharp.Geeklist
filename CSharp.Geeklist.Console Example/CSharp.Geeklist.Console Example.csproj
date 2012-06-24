@@ -34,15 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging">
-      <HintPath>..\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Spring.Rest">
-      <HintPath>..\packages\Spring.Rest.1.1.0\lib\net40-client\Spring.Rest.dll</HintPath>
-    </Reference>
-    <Reference Include="Spring.Social.Core">
-      <HintPath>..\packages\Spring.Social.Core.1.0.0\lib\net40-client\Spring.Social.Core.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -54,12 +45,6 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CSharp.Geeklist\CSharp.Geeklist.csproj">
-      <Project>{0FF28DB6-7608-4874-9EDB-E4F32AD0C574}</Project>
-      <Name>CSharp.Geeklist</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Spring.Rest.txt" />

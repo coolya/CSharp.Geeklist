@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CBC93AD2-3790-4319-91F1-8F70B9738F4E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CSharp.Geeklist.Net45</RootNamespace>
+    <AssemblyName>CSharp.Geeklist.Net45</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Api\Enums\Activity.cs" />
+    <Compile Include="Api\Enums\Highfive.cs" />
+    <Compile Include="Api\GeeklistApiError.cs" />
+    <Compile Include="Api\GeeklistApiException.cs" />
+    <Compile Include="Api\Impl\ActivityOperation.cs" />
+    <Compile Include="Api\Impl\CardOperations.cs" />
+    <Compile Include="Api\Impl\FollowerOperations.cs" />
+    <Compile Include="Api\Impl\FollowingOperations.cs" />
+    <Compile Include="Api\Impl\GeeklistApi.cs" />
+    <Compile Include="Api\Impl\HighFiveOperations.cs" />
+    <Compile Include="Api\Impl\MicroOperations.cs" />
+    <Compile Include="Api\Impl\OAuthAwareOperation.cs" />
+    <Compile Include="Api\Impl\UserOperations.cs" />
+    <Compile Include="Api\Interfaces\IActivityOperations.cs" />
+    <Compile Include="Api\Interfaces\ICardOperations.cs" />
+    <Compile Include="Api\Interfaces\IFollowerOperations.cs" />
+    <Compile Include="Api\Interfaces\IFollowingOperations.cs" />
+    <Compile Include="Api\Interfaces\IGeeklist.cs" />
+    <Compile Include="Api\Interfaces\IHighfiveOperations.cs" />
+    <Compile Include="Api\Interfaces\IMicroOperations.cs" />
+    <Compile Include="Api\Interfaces\IUserOperations.cs" />
+    <Compile Include="Api\Models\AccessTokenContainer.cs" />
+    <Compile Include="Api\Models\ActivitiesResponse.cs" />
+    <Compile Include="Api\Models\Activity.cs" />
+    <Compile Include="Api\Models\Avatar.cs" />
+    <Compile Include="Api\Models\Card.cs" />
+    <Compile Include="Api\Models\CardDetails.cs" />
+    <Compile Include="Api\Models\CardResponse.cs" />
+    <Compile Include="Api\Models\CardsResponse.cs" />
+    <Compile Include="Api\Models\Company.cs" />
+    <Compile Include="Api\Models\Criteria.cs" />
+    <Compile Include="Api\Models\FollowersDetails.cs" />
+    <Compile Include="Api\Models\FollowersResponse.cs" />
+    <Compile Include="Api\Models\FollowingDetails.cs" />
+    <Compile Include="Api\Models\FollowingResponse.cs" />
+    <Compile Include="Api\Models\Micro.cs" />
+    <Compile Include="Api\Models\MicroResponse.cs" />
+    <Compile Include="Api\Models\MicrosDetails.cs" />
+    <Compile Include="Api\Models\MicrosResponse.cs" />
+    <Compile Include="Api\Models\Reply.cs" />
+    <Compile Include="Api\Models\ShallowUser.cs" />
+    <Compile Include="Api\Models\ShortCode.cs" />
+    <Compile Include="Api\Models\Social.cs" />
+    <Compile Include="Api\Models\Stats.cs" />
+    <Compile Include="Api\Models\TrendingHistory.cs" />
+    <Compile Include="Api\Models\User.cs" />
+    <Compile Include="Api\Models\UserResponse.cs" />
+    <Compile Include="Api\Models\ViaApp.cs" />
+    <Compile Include="Connect\GeeklistServiceProvider.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
