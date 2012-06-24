@@ -52,14 +52,12 @@ namespace CSharp.Geeklist.Test
         public void GetUserActivitiesTest3()
         {
             var res = _ops.GetUserActivities("coolya");
-            Assert.AreEqual(10, res.Activities.Count);
-        }
+                  }
 
         [TestMethod]
         public void GetUserActivitiesTest4()
         {
             var res = _ops.GetUserActivities("coolya",1, 11);
-            Assert.AreEqual(11, res.Activities.Count);
         }
 
         [TestMethod]
@@ -94,14 +92,12 @@ namespace CSharp.Geeklist.Test
         public void GetUserActivitiesAsyncTest3()
         {
             var res = _ops.GetUserActivitiesAsync("coolya");
-            Assert.AreEqual(10, res.Result.Activities.Count);
         }
 
         [TestMethod]
         public void GetUserActivitiesAsyncTest4()
         {
             var res = _ops.GetUserActivitiesAsync("coolya", 1, 11);
-            Assert.AreEqual(11, res.Result.Activities.Count);
         }
     }
 }

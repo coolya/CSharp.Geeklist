@@ -112,8 +112,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActivityTest.cs" />
+    <Compile Include="CardTest.cs" />
+    <Compile Include="FollowerTest.cs" />
+    <Compile Include="FollowingTest.cs" />
     <Compile Include="GeneralThreadAffineContext.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
