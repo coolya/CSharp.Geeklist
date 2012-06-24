@@ -11,15 +11,9 @@ namespace CSharp.Geeklist.Test
     [TestClass]
     public class FollowerTest
     {
-        CSharp.Geeklist.Api.Interfaces.IFollowerOperations _ops;
-
-        [TestInitialize]
-        public void Init()
-        {
-            _ops = new Geeklist.Connect
+        static CSharp.Geeklist.Api.Interfaces.IFollowerOperations _ops = new Geeklist.Connect
                 .GeeklistServiceProvider("6S8YzYWymDGfb6mB8VPR5Wj_03M", "sz0Wp8bzq_U_Fgsum7XBJrUWSIuIBCvIpoR8PMpMCts")
-                .GetApi("mXTwZHawIxlOTf-rP9WpplrFERE", "FiVyVFRIrAILzkZ2TTflQu1uNrMJKnREISS1NiwBzEA").FollowerOperations;           
-        }
+                .GetApi("mXTwZHawIxlOTf-rP9WpplrFERE", "FiVyVFRIrAILzkZ2TTflQu1uNrMJKnREISS1NiwBzEA").FollowerOperations;
 
         private IUserOperations UserOps
         {
