@@ -11,7 +11,7 @@ namespace CSharp.Geeklist.Api.Impl
     class UserOperations : OAuthAwareOperation, Interfaces.IUserOperations
     {
         const string USERURI =  API_ROOT + "user";
-        const string FORINGUSERURI = API_ROOT + "users/:{0}";
+        const string FORINGUSERURI = API_ROOT + "users/{0}";
 
         public UserOperations(Client client) : base (client) {}
 

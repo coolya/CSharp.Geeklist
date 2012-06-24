@@ -7,6 +7,7 @@ using Chq.OAuth;
 using System.Reflection;
 using System.Reflection.Emit;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace CSharp.Geeklist.Api.Impl
 {
@@ -55,14 +56,13 @@ namespace CSharp.Geeklist.Api.Impl
                 .Sign(client.AccessToken.Secret);
         }
 
-        private OAuthRequest PostRequest(Uri uri, object parameters)
+        private OAuthRequest PostRequest(Uri uri, object data)
         {
             return client.MakeRequest("POST")
-                .WithParameters(parameters)
                 .ForResource(client.AccessToken.Token, uri)
+                .WithFormEncodedData(data)                 
                 .Sign(client.AccessToken.Secret);
         }
-
         
         private OAuthRequest PostRequest(Uri uri)
         {
@@ -172,8 +172,32 @@ namespace CSharp.Geeklist.Api.Impl
             }
             catch (Exception ex)
             {
+                var msg = GetMessageFromException(ex);
+                
                 throw new GeeklistApiException("Post request failed", ex);
             }
+        }
+
+        private string GetMessageFromException(Exception ex)
+        {
+            var webex = ex.InnerException as WebException;
+
+            if (webex != null)
+            {
+                var resposne = webex.Response;
+
+                if (resposne.ContentLength > 0)
+                {
+                    var stream = resposne.GetResponseStream();
+
+                    byte[] data = new byte[resposne.ContentLength];
+                    stream.Read(data, 0, (int)resposne.ContentLength);
+
+                    return Encoding.UTF8.GetString(data, 0, data.Length);
+                }
+            }
+
+            return string.Empty;
         }
 
         protected void Post(string uri)

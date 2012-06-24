@@ -12,8 +12,8 @@ namespace CSharp.Geeklist.Api.Impl
     {
 
         const string OWN_CARDS = API_ROOT + "user/cards";
-        const string FORING_CARDS = API_ROOT + "users/:{0}/cards";
-        const string SINGLE_CARD = API_ROOT + "cards/:{0}";
+        const string FORING_CARDS = API_ROOT + "users/{0}/cards";
+        const string SINGLE_CARD = API_ROOT + "cards/{0}";
         const string CREATE_CARD = API_ROOT + "cards";
 
         public CardOperations(Client client) : base(client) {}

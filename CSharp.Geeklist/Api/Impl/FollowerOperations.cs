@@ -12,7 +12,7 @@ namespace CSharp.Geeklist.Api.Impl
     {
 
         const string OWN_FOLLOWERS = API_ROOT + "user/followers";
-        const string FORING_FOLLOWERS = API_ROOT + "users/:{0}/followers";
+        const string FORING_FOLLOWERS = API_ROOT + "users/{0}/followers";
         const string UN_FOLLOW = API_ROOT + "user/follow";
 
         public FollowerOperations(Client client) : base(client) {}

@@ -12,7 +12,7 @@ namespace CSharp.Geeklist.Api.Impl
     class ActivityOperation : OAuthAwareOperation, Interfaces.IActivityOperations
     {
         const string OWN_ACTIVITIES = API_ROOT + "user/activity";
-        const string FORING_ACTIVITIES = API_ROOT + "users/:{0}/activity";
+        const string FORING_ACTIVITIES = API_ROOT + "users/{0}/activity";
         const string GLOBAL_ACTIVITIES = API_ROOT + "activity";
 
         public ActivityOperation(Client client) : base(client) {}

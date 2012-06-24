@@ -12,7 +12,7 @@ namespace CSharp.Geeklist.Api.Impl
 
         const string OWN_MICROS = API_ROOT + "user/micros";
         const string FORING_MICROWS = API_ROOT + "users/{0}/micros";
-        const string SINGLE_MICRO = API_ROOT + "micros/:{0}";
+        const string SINGLE_MICRO = API_ROOT + "micros/{0}";
         const string CREATE_MICRO = API_ROOT + "micros";
 
         public MicroOperations(Client client) : base(client) {}

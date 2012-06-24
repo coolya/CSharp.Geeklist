@@ -11,7 +11,7 @@ namespace CSharp.Geeklist.Api.Impl
     class FollowingOperations : OAuthAwareOperation, Interfaces.IFollowingOperations
     {
         const string OWN_FOLLOWINGS = API_ROOT + "user/following";
-        const string FORING_FOLLOWINGS = API_ROOT + "users/:{0}/following";
+        const string FORING_FOLLOWINGS = API_ROOT + "users/{0}/following";
 
         public FollowingOperations(Client client): base(client) {}
 
