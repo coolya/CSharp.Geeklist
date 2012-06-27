@@ -31,7 +31,7 @@ namespace CSharp.Geeklist.Connect
 	/// Geeklist <see cref="IServiceProvider"/> implementation.
     /// </summary>
     /// <author>Scott Smith</author>
-	public class GeeklistServiceProvider
+    public sealed class GeeklistServiceProvider
     {
         Client client;
 

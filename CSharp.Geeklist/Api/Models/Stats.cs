@@ -27,8 +27,8 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist stats.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	
-	public class Stats
+
+    public sealed class Stats
 	{
 		[JsonProperty("highfives")]
 		public int Highfives { get; set; }

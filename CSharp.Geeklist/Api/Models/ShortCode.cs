@@ -27,8 +27,8 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist short code.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	
-	public class ShortCode
+
+    public sealed class ShortCode
 	{
 		[JsonProperty("id")]
 		public string Id { get; set; }

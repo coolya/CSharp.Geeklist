@@ -29,7 +29,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// </summary>
 	/// <author>Scott Smith</author>
 	
-	public class User
+	public sealed class User
 	{
 		[JsonProperty("active_at")]
 		public string ActiveAt { get; set; }
@@ -47,7 +47,7 @@ namespace CSharp.Geeklist.Api.Models
 		public string Email { get; set; }
 
 		[JsonProperty("featured_cards")]
-		public List<string> FeaturedCards { get; set; }
+		public IList<string> FeaturedCards { get; set; }
 
 		[JsonProperty("is_beta")]
 		public bool IsBeta { get; set; }
@@ -68,13 +68,13 @@ namespace CSharp.Geeklist.Api.Models
 		public string ScreenName { get; set; }
 
 		[JsonProperty("social_links")]
-		public List<string> SocialLinks { get; set; }
+		public IList<string> SocialLinks { get; set; }
 
 		[JsonProperty("trending_at")]
 		public string TrendingAt { get; set; }
 
 		[JsonProperty("trending_hist")]
-		public List<TrendingHistory> TrendingHist { get; set; }
+		public IList<TrendingHistory> TrendingHist { get; set; }
 
 		[JsonProperty("settings")]
 		public Settings Settings { get; set; }
@@ -100,7 +100,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// </summary>
 	/// <author>Scott Smith</author>
 	
-	public class Settings
+	public sealed class Settings
 	{
 		[JsonProperty("h5")]
 		public H5Settings H5 { get; set; }
@@ -114,7 +114,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// </summary>
 	/// <author>Scott Smith</author>
 	
-	public class H5Settings
+	public sealed class H5Settings
 	{
 		[JsonProperty("tweet")]
 		public bool Tweet { get; set; }
@@ -125,7 +125,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// </summary>
 	/// <author>Scott Smith</author>
 	
-	public class MicroSettings
+	public sealed class MicroSettings
 	{
 		[JsonProperty("card")]
 		public CardSettings Card { get; set; }
@@ -139,7 +139,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// </summary>
 	/// <author>Scott Smith</author>
 	
-	public class CardSettings
+	public sealed class CardSettings
 	{
 		[JsonProperty("headline")]
 		public string Headline { get; set; }

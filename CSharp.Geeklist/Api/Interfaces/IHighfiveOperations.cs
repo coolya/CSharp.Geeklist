@@ -20,6 +20,7 @@
 
 using CSharp.Geeklist.Api.Enums;
 using System.Threading.Tasks;
+using Windows.Foundation;
 
 namespace CSharp.Geeklist.Api.Interfaces
 {
@@ -37,12 +38,23 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
 		void Highfive(HighfiveType type, string itemId);
 
-		/// <summary>
+#if WINMD
+        /// <summary>
+        /// Asynchronously highfives the specified card or micro
+        /// </summary>
+        /// <param name="type">The type of item to highfive.</param>
+        /// <param name="itemId">The id of the item to be highfived.</param>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        IAsyncAction HighfiveAsync(HighfiveType type, string itemId);
+#else
+        /// <summary>
 		/// Asynchronously highfives the specified card or micro
 		/// </summary>
 		/// <param name="type">The type of item to highfive.</param>
 		/// <param name="itemId">The id of the item to be highfived.</param>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
 		Task HighfiveAsync(HighfiveType type, string itemId);
-	}
+#endif
+
+    }
 }

@@ -29,7 +29,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// </summary>
 	/// <author>Scott Smith</author>
 	
-	public class Card
+	public sealed class Card
 	{
 		[JsonProperty("author_id")]
 		public string AuthorId { get; set; }
@@ -50,13 +50,13 @@ namespace CSharp.Geeklist.Api.Models
 		public string Permalink { get; set; }
 
 		[JsonProperty("skills")]
-		public List<string> Skills { get; set; }
+		public IList<string> Skills { get; set; }
 
 		[JsonProperty("slug")]
 		public string Slug { get; set; }
 
 		[JsonProperty("tasks")]
-		public List<string> Tasks { get; set; }
+		public IList<string> Tasks { get; set; }
 
 		[JsonProperty("trending_at")]
 		public string TrendingAt { get; set; }
@@ -65,7 +65,7 @@ namespace CSharp.Geeklist.Api.Models
 		public string TrendingBy { get; set; }
 
 		[JsonProperty("trending_hist")]
-		public List<TrendingHistory> TrendingHist { get; set; }
+		public IList<TrendingHistory> TrendingHist { get; set; }
 
 		[JsonProperty("updated_at")]
 		public string UpdatedAt { get; set; }
@@ -80,7 +80,7 @@ namespace CSharp.Geeklist.Api.Models
 		public string Id { get; set; }
 
 		[JsonProperty("contributors")]
-		public List<Contributor> Contributors { get; set; }
+		public IList<Contributor> Contributors { get; set; }
 
 		[JsonProperty("has_highfived")]
 		public bool HasHighfived { get; set; }
@@ -94,7 +94,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// </summary>
 	/// <author>Scott Smith</author>
 	
-	public class Contributor
+	public sealed class Contributor
 	{
 		[JsonProperty("screen_name")]
 		public string ScreenName { get; set; }

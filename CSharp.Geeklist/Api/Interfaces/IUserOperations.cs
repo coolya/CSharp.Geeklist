@@ -20,6 +20,7 @@
 
 using System.Threading.Tasks;
 using CSharp.Geeklist.Api.Models;
+using Windows.Foundation;
 
 namespace CSharp.Geeklist.Api.Interfaces
 {
@@ -44,6 +45,22 @@ namespace CSharp.Geeklist.Api.Interfaces
         /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
 	    UserResponse GetUser(string screenName);
 
+#if WINMD
+        /// <summary>
+        /// Asynchronously retrieves the authenticated user's Geeklist profile details.
+        /// </summary>
+        /// <returns>A <see cref="UserResponse"/> object representing the user's profile.</returns>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        IAsyncOperation<UserResponse> GetUserAsync();
+
+        /// <summary>
+        /// Asynchronously retrieves a specific user's Geeklist profile details. 
+        /// </summary>
+        /// <param name="screenName">The screen name for the user whose details are to be retrieved.</param>
+        /// <returns>A <see cref="UserResponse"/> object representing the user's profile.</returns>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        IAsyncOperation<UserResponse> GetUserAsync(string screenName);
+#else
 		/// <summary>
 		/// Asynchronously retrieves the authenticated user's Geeklist profile details.
 		/// </summary>
@@ -58,5 +75,6 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// <returns>A <see cref="UserResponse"/> object representing the user's profile.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
 		Task<UserResponse> GetUserAsync(string screenName);
+#endif
     }
 }

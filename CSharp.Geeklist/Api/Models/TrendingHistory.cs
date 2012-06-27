@@ -27,8 +27,8 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist trending history.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	
-	public class TrendingHistory
+
+    public sealed class TrendingHistory
 	{
 		[JsonProperty("trending_at")]
 		public string TrendingAt { get; set; }

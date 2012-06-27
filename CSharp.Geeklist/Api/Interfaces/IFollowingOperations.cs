@@ -20,6 +20,7 @@
 
 using System.Threading.Tasks;
 using CSharp.Geeklist.Api.Models;
+using Windows.Foundation;
 
 namespace CSharp.Geeklist.Api.Interfaces
 {
@@ -68,7 +69,47 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// <returns>A <see cref="FollowingResponse"/> with users the specified user is following.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
 		FollowingResponse GetUserFollowing(string screenName, int page, int count);
+#if WINMD
+        /// <summary>
+        /// Asynchronously retrieves the first 10 users the authenticated user is following.
+        /// </summary>
+        /// <returns>A <see cref="FollowingResponse"/> with users the authenticated user is following.</returns>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        IAsyncOperation<FollowingResponse> GetUserFollowingAsync();
 
+        /// <summary>
+        /// Asynchronously retrieves users the authenticated user is following.
+        /// </summary>
+        /// <param name="page">The page to return.</param>
+        /// <param name="count">
+        /// The number of <see cref="FollowingResponse"/>s per page. Should be less than or equal to 50. 
+        /// (Will return at most 50 entries, even if count is greater than 50)
+        /// </param>
+        /// <returns>A <see cref="FollowingResponse"/> with users the authenticated user is following.</returns>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        IAsyncOperation<FollowingResponse> GetUserFollowingAsync(int page, int count);
+
+        /// <summary>
+        /// Asynchronously retrieves the first 10 users the specified user is following.
+        /// </summary>
+        /// <param name="screenName">The screen name of the user to retrieve the list of users they are following.</param>
+        /// <returns>A <see cref="FollowingResponse"/> with users the specified user is following.</returns>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        IAsyncOperation<FollowingResponse> GetUserFollowingAsync(string screenName);
+
+        /// <summary>
+        /// Asynchronously retrieves users the specified user is following.
+        /// </summary>
+        /// <param name="screenName">The screen name of the user to retrieve the list of users they are following.</param>
+        /// <param name="page">The page to return.</param>
+        /// <param name="count">
+        /// The number of <see cref="FollowingResponse"/>s per page. Should be less than or equal to 50. 
+        /// (Will return at most 50 entries, even if count is greater than 50)
+        /// </param>
+        /// <returns>A <see cref="FollowingResponse"/> with users the specified user is following.</returns>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        IAsyncOperation<FollowingResponse> GetUserFollowingAsync(string screenName, int page, int count);
+#else
 		/// <summary>
 		/// Asynchronously retrieves the first 10 users the authenticated user is following.
 		/// </summary>
@@ -108,5 +149,6 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// <returns>A <see cref="FollowingResponse"/> with users the specified user is following.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
 		Task<FollowingResponse> GetUserFollowingAsync(string screenName, int page, int count);
+#endif
 	}
 }

@@ -29,12 +29,12 @@ namespace CSharp.Geeklist.Api.Models
 	/// </summary>
 	/// <author>Scott Smith</author>
 	
-	public class FollowersDetails
+	public sealed class FollowersDetails
 	{
 		[JsonProperty("total_followers")]
 		public int TotalFollowers { get; set; }
 
 		[JsonProperty("followers")]
-		public List<User> Followers { get; set; }
+		public IList<User> Followers { get; set; }
 	}
 }

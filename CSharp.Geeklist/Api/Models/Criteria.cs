@@ -29,12 +29,34 @@ namespace CSharp.Geeklist.Api.Models
 	/// </summary>
 	/// <author>Scott Smith</author>
 	
-	public class Criteria
+	public sealed class Criteria
 	{
+        IList<string> _availableFor = new List<string>();
+        IList<string> _lookingFor = new List<string>();
+
 		[JsonProperty("available_for")]
-		public List<string> AvailableFor { get; set; }
+        public IList<string> AvailableFor
+        {
+            get
+            {
+                return _availableFor;
+            }
+            set
+            {
+                _availableFor = value;
+            }
+        }
 
 		[JsonProperty("looking_for")]
-		public List<string> LookingFor { get; set; }
+		public IList<string> LookingFor {
+            get
+            {
+                return _lookingFor;
+            }
+            set
+            {
+                _lookingFor = value;
+            }
+        }
 	}
 }

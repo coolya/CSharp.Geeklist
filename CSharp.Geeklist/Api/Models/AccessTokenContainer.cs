@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSharp.Geeklist.Api.Models
 {
-    public class AccessTokenContainer
+    public sealed class AccessTokenContainer
     {
         public AccessTokenContainer(string token, string secret)
         {

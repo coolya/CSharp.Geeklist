@@ -27,7 +27,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist micros response.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	public class MicrosResponse
+    public sealed class MicrosResponse
 	{
 		[JsonProperty("status")]
 		public string Status { get; set; }

@@ -20,6 +20,7 @@
 
 using System.Threading.Tasks;
 using CSharp.Geeklist.Api.Models;
+using Windows.Foundation;
 
 namespace CSharp.Geeklist.Api.Interfaces
 {
@@ -84,7 +85,63 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// <returns>The created <see cref="CardResponse"/>.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
 		CardResponse CreateCard(string headline);
+#if WINMD
+        /// <summary>
+        /// Asynchronously retrieves the first 10 cards of the authenticated user.
+        /// </summary>
+        /// <returns>A <see cref="CardsResponse"/> with cards of the authenticated user.</returns>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        IAsyncOperation<CardsResponse> GetUserCardsAsync();
 
+        /// <summary>
+        /// Asynchronously retrieves cards of the authenticated user.
+        /// </summary>
+        /// <param name="page">The page to return.</param>
+        /// <param name="count">
+        /// The number of <see cref="CardResponse"/>s per page. Should be less than or equal to 50. 
+        /// (Will return at most 50 entries, even if count is greater than 50)
+        /// </param>
+        /// <returns>A <see cref="CardsResponse"/> with cards of the authenticated user.</returns>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        IAsyncOperation<CardsResponse> GetUserCardsAsync(int page, int count);
+
+        /// <summary>
+        /// Asynchronously retrieves the first 10 cards of the given user.
+        /// </summary>
+        /// <param name="screenName">The screen name of the user whose cards are being requested.</param>
+        /// <returns>A <see cref="CardsResponse"/> with cards of the specified user.</returns>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        IAsyncOperation<CardsResponse> GetUserCardsAsync(string screenName);
+
+        /// <summary>
+        /// Asynchronously retrieves cards of the given user.
+        /// </summary>
+        /// <param name="screenName">The screen name of the user whose cards are being requested.</param>
+        /// <param name="page">The page to return.</param>
+        /// <param name="count">
+        /// The number of <see cref="CardResponse"/>s per page. Should be less than or equal to 50. 
+        /// (Will return at most 50 entries, even if count is greater than 50)
+        /// </param>
+        /// <returns>A <see cref="CardsResponse"/> with cards of the specified user.</returns>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        IAsyncOperation<CardsResponse> GetUserCardsAsync(string screenName, int page, int count);
+
+        /// <summary>
+        /// Asynchronously retrieves the card with the given card id.
+        /// </summary>
+        /// <param name="cardId">The id of the card whose data is being requested.</param>
+        /// <returns>A <see cref="CardResponse"/> with the specified id.</returns>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        IAsyncOperation<CardResponse> GetCardAsync(string cardId);
+
+        /// <summary>
+        /// Asynchronously creates a new card
+        /// </summary>
+        /// <param name="headline">The headline for the new card.</param>
+        /// <returns>The created <see cref="CardResponse"/>.</returns>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        IAsyncOperation<CardResponse> CreateCardAsync(string headline);
+#else
 		/// <summary>
 		/// Asynchronously retrieves the first 10 cards of the authenticated user.
 		/// </summary>
@@ -140,5 +197,6 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// <returns>The created <see cref="CardResponse"/>.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
 		Task<CardResponse> CreateCardAsync(string headline);
+#endif
 	}
 }

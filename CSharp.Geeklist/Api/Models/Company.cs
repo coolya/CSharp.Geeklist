@@ -27,8 +27,8 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist company.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	
-	public class Company
+
+    public sealed class Company
 	{
 		[JsonProperty("name")]
 		public string Name { get; set; }

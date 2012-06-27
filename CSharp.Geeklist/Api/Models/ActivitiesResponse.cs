@@ -29,13 +29,13 @@ namespace CSharp.Geeklist.Api.Models
 	/// </summary>
 	/// <author>Scott Smith</author>
 	
-	public class ActivitiesResponse
+	public sealed class ActivitiesResponse
 	{
 		[JsonProperty("status")]
 		public string Status { get; set; }
 
 		[JsonProperty("data")]
-		public List<Activity> Activities { get; set; }
+		public IList<Activity> Activities { get; set; }
 
 		[JsonIgnore]
 		public string RawJson { get; set; }

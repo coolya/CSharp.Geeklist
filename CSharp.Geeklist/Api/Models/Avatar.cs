@@ -27,8 +27,8 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist avatar.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	
-	public class Avatar
+
+    public sealed class Avatar
 	{
 		[JsonProperty("small")]
 		public string Small { get; set; }

@@ -27,8 +27,8 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist social.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	
-	public class Social
+
+    public sealed class Social
 	{
 		[JsonProperty("twitter_followers_count")]
 		public int TwitterFollowersCount { get; set; }

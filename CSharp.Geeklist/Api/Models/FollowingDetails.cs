@@ -29,12 +29,23 @@ namespace CSharp.Geeklist.Api.Models
 	/// </summary>
 	/// <author>Scott Smith</author>
 	
-	public class FollowingDetails
+	public sealed class FollowingDetails
 	{
+        IList<User> _following = new List<User>();
+
 		[JsonProperty("total_following")]
 		public int TotalFollowing { get; set; }
 
 		[JsonProperty("following")]
-		public List<User> Following { get; set; }
+		public IList<User> Following {
+            get
+            {
+                return _following;
+            }
+            set
+            {
+                _following = value;
+            }
+        }
 	}
 }

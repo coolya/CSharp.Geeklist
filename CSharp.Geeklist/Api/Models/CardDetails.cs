@@ -29,12 +29,23 @@ namespace CSharp.Geeklist.Api.Models
 	/// </summary>
 	/// <author>Scott Smith</author>
 	
-	public class CardDetails
+	public sealed class CardDetails
 	{
+        IList<Card> _cards = new List<Card>();
+
 		[JsonProperty("total_cards")]
 		public int TotalCards { get; set; }
 
 		[JsonProperty("cards")]
-		public List<Card> Cards { get; set; }
+		public IList<Card> Cards {
+            get
+            {
+                return _cards;
+            }
+            set
+            {
+                _cards = value;
+            }
+        }
 	}
 }

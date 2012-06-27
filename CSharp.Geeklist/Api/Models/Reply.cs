@@ -27,8 +27,8 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist short code.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	
-	public class Reply
+
+    public sealed class Reply
 	{
 		[JsonProperty("in_reply_to")]
 		public InReplyTo InReplyTo { get; set; }
@@ -37,7 +37,7 @@ namespace CSharp.Geeklist.Api.Models
 		public InReplyTo Thread { get; set; }
 	}
 
-	public class InReplyTo
+	public sealed class InReplyTo
 	{
 		[JsonProperty("id")]
 		public string Id { get; set; }

@@ -20,6 +20,7 @@
 
 using System.Threading.Tasks;
 using CSharp.Geeklist.Api.Models;
+using Windows.Foundation;
 
 namespace CSharp.Geeklist.Api.Interfaces
 {
@@ -94,7 +95,73 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// <returns>The created <see cref="MicroResponse"/>.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
 		MicroResponse CreateMicro(string status, string type, string itemId);
+#if WINMD
+        /// <summary>
+        /// Asynchronously retrieves the first 10 micros of the authenticated user.
+        /// </summary>
+        /// <returns>A <see cref="MicrosResponse"/> with micros of the authenticated user.</returns>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        IAsyncOperation<MicrosResponse> GetUserMicrosAsync();
 
+        /// <summary>
+        /// Asynchronously retrieves micros of the authenticated user.
+        /// </summary>
+        /// <param name="page">The page to return.</param>
+        /// <param name="count">
+        /// The number of <see cref="MicroResponse"/>s per page. Should be less than or equal to 50. 
+        /// (Will return at most 50 entries, even if count is greater than 50)
+        /// </param>
+        /// <returns>A <see cref="MicrosResponse"/> with micros of the authenticated user.</returns>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        IAsyncOperation<MicrosResponse> GetUserMicrosAsync(int page, int count);
+
+        /// <summary>
+        /// Asynchronously retrieves the first 10 micros of the given user.
+        /// </summary>
+        /// <param name="screenName">The screen name of the user whose micros are being requested.</param>
+        /// <returns>A <see cref="MicrosResponse"/> with micros of the specified user.</returns>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        IAsyncOperation<MicrosResponse> GetUserMicrosAsync(string screenName);
+
+        /// <summary>
+        /// Asynchronously retrieves micros of the given user.
+        /// </summary>
+        /// <param name="screenName">The screen name of the user whose micros are being requested.</param>
+        /// <param name="page">The page to return.</param>
+        /// <param name="count">
+        /// The number of <see cref="MicroResponse"/>s per page. Should be less than or equal to 50. 
+        /// (Will return at most 50 entries, even if count is greater than 50)
+        /// </param>
+        /// <returns>A <see cref="MicrosResponse"/> with micros of the specified user.</returns>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        IAsyncOperation<MicrosResponse> GetUserMicrosAsync(string screenName, int page, int count);
+
+        /// <summary>
+        /// Asynchronously retrieves the micro with the given micro id.
+        /// </summary>
+        /// <param name="microId">The id of the micro whose data is being requested.</param>
+        /// <returns>A <see cref="MicroResponse"/> with the specified id.</returns>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        IAsyncOperation<MicroResponse> GetMicroAsync(string microId);
+
+        /// <summary>
+        /// Asynchronously creates a new micro for the authenticated user
+        /// </summary>
+        /// <param name="status">The content for the micro.</param>
+        /// <returns>The created <see cref="MicroResponse"/>.</returns>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        IAsyncOperation<MicroResponse> CreateMicroAsync(string status);
+
+        /// <summary>
+        /// Asynchronously creates a new micro for the authenticated user
+        /// </summary>
+        /// <param name="status">The content for the micro.</param>
+        /// <param name="type">The type of item being replied to. Can be card or micro.</param>
+        /// <param name="itemId">The id of the card or micro being replied to.</param>
+        /// <returns>The created <see cref="MicroResponse"/>.</returns>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        IAsyncOperation<MicroResponse> CreateMicroAsync(string status, string type, string itemId);
+#else
 		/// <summary>
 		/// Asynchronously retrieves the first 10 micros of the authenticated user.
 		/// </summary>
@@ -160,5 +227,6 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// <returns>The created <see cref="MicroResponse"/>.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
 		Task<MicroResponse> CreateMicroAsync(string status, string type, string itemId);
+#endif
 	}
 }

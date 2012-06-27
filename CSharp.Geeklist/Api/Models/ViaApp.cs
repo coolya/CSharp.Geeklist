@@ -27,8 +27,8 @@ namespace CSharp.Geeklist.Api.Models
 	/// Represents a Geeklist short code.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	
-	public class ViaApp
+
+    public sealed class ViaApp
 	{
 		[JsonProperty("link")]
 		public string Link { get; set; }

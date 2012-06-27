@@ -29,7 +29,7 @@ namespace CSharp.Geeklist.Api.Models
 	/// </summary>
 	/// <author>Scott Smith</author>
 	
-	public class Micro
+	public sealed class Micro
 	{
 		[JsonProperty("type")]
 		public string Type { get; set; }
@@ -44,7 +44,7 @@ namespace CSharp.Geeklist.Api.Models
 		public string Permalink { get; set; }
 
 		[JsonProperty("trending_hist")]
-		public List<TrendingHistory> TrendingHist { get; set; }
+		public IList<TrendingHistory> TrendingHist { get; set; }
 
 		[JsonProperty("trending_at")]
 		public string TrendingAt { get; set; }
@@ -62,10 +62,10 @@ namespace CSharp.Geeklist.Api.Models
 		public bool IsTrending { get; set; }
 
 		[JsonProperty("hashtags")]
-		public List<object> Hashtags { get; set; }		//TODO: Need to support this more directly
+		public IList<object> Hashtags { get; set; }		//TODO: Need to support this more directly
 
 		[JsonProperty("mentions")]
-		public List<object> Mentions { get; set; }		//TODO: Need to support this more directly
+		public IList<object> Mentions { get; set; }		//TODO: Need to support this more directly
 
 		[JsonProperty("via_app")]
 		public ViaApp ViaApp { get; set; }

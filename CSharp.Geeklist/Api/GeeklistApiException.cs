@@ -28,7 +28,7 @@ namespace CSharp.Geeklist.Api
     /// </summary>
     /// <author>Scott Smith</author>
     
-    public class GeeklistApiException : Exception
+    class GeeklistApiException : Exception
     {
         private readonly GeeklistApiError _error;
         private readonly string _serverResponse;
