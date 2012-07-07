@@ -54,11 +54,37 @@ namespace CSharp.Geeklist.Connect
             var context = new OAuthContext(consumerKey,consumerSecret,
                 REQUEST_TOKEN_URI,
                 AUTHORIZE_URI,
-                ACCESS_TOKEN_URI);
+                ACCESS_TOKEN_URI
+                ,null, true);
 
             client = new Client(context);
 
             
+            var requestTokenResponse = client.MakeRequest("GET")
+            .ForRequestToken()
+            .Sign()
+            .ExecuteRequest().Result;
+
+            client.RequestToken = TokenContainer.Parse(requestTokenResponse);
+        }
+
+        /// <summary>
+        /// Creates a new instance of <see cref="GeeklistServiceProvider"/>.
+        /// </summary>
+        /// <param name="consumerKey">The application's API key.</param>
+        /// <param name="consumerSecret">The application's API secret.</param>
+        /// <param name="callbackUri">The callback Uri </param>
+        public GeeklistServiceProvider(string consumerKey, string consumerSecret, string callbackUri)
+        {
+            var context = new OAuthContext(consumerKey, consumerSecret,
+                REQUEST_TOKEN_URI,
+                AUTHORIZE_URI,
+                ACCESS_TOKEN_URI,
+                callbackUri);
+
+            client = new Client(context);
+
+
             var requestTokenResponse = client.MakeRequest("GET")
             .ForRequestToken()
             .Sign()

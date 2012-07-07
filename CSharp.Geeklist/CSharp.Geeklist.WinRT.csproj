@@ -172,7 +172,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Sandbox|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Sandbox\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;NETFX_CORE, SANDBOX</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE, SANDBOX, WINMD</DefineConstants>
     <NoStdLib>true</NoStdLib>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
