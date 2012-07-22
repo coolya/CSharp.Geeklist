@@ -48,28 +48,28 @@ namespace CSharp.Geeklist.Test
         public void GetUserFollowingAsyncTest()
         {
             var res = _ops.GetUserFollowingAsync();
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
         }
 
         [TestMethod]
         public void GetUserFollowingAsyncTest2()
         {
             var res = _ops.GetUserFollowingAsync("rekatz");
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
         }
 
         [TestMethod]
         public void GetUserFollowingAsyncTest3()
         {
             var res = _ops.GetUserFollowingAsync("rekatz", 1, 11);
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
         }
 
         [TestMethod]
         public void GetUserFollowingAsyncTest4()
         {
             var res = _ops.GetUserFollowingAsync(1, 11);
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
         }
     }
 }

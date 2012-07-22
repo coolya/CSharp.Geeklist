@@ -51,11 +51,10 @@ namespace CSharp.Geeklist.Connect
         /// <param name="consumerSecret">The application's API secret.</param>
 		public GeeklistServiceProvider(string consumerKey, string consumerSecret)
         {
-            var context = new OAuthContext(consumerKey,consumerSecret,
-                REQUEST_TOKEN_URI,
-                AUTHORIZE_URI,
-                ACCESS_TOKEN_URI
-                ,null, true);
+            var context = new OAuthContext(consumerKey, consumerSecret,
+                                           REQUEST_TOKEN_URI,
+                                           AUTHORIZE_URI,
+                                           ACCESS_TOKEN_URI);
 
             client = new Client(context);
 
@@ -63,7 +62,7 @@ namespace CSharp.Geeklist.Connect
             var requestTokenResponse = client.MakeRequest("GET")
             .ForRequestToken()
             .Sign()
-            .ExecuteRequest().Result;
+            .ExecuteRequest().AsTask().Result;
 
             client.RequestToken = TokenContainer.Parse(requestTokenResponse);
         }
@@ -77,10 +76,10 @@ namespace CSharp.Geeklist.Connect
         public GeeklistServiceProvider(string consumerKey, string consumerSecret, string callbackUri)
         {
             var context = new OAuthContext(consumerKey, consumerSecret,
-                REQUEST_TOKEN_URI,
-                AUTHORIZE_URI,
-                ACCESS_TOKEN_URI,
-                callbackUri);
+                                           REQUEST_TOKEN_URI,
+                                           AUTHORIZE_URI,
+                                           ACCESS_TOKEN_URI,
+                                           callbackUri, false, SignatureMethods.HMAC_SHA1);
 
             client = new Client(context);
 
@@ -88,7 +87,7 @@ namespace CSharp.Geeklist.Connect
             var requestTokenResponse = client.MakeRequest("GET")
             .ForRequestToken()
             .Sign()
-            .ExecuteRequest().Result;
+            .ExecuteRequest().AsTask().Result;
 
             client.RequestToken = TokenContainer.Parse(requestTokenResponse);
         }

@@ -34,14 +34,14 @@ namespace CSharp.Geeklist.Test
         public void GetUserAsyncTest()
         {
             var res = _ops.GetUserAsync();
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
         }
 
         [TestMethod]
         public void GetUserAsyncTest2()
         {
             var res = _ops.GetUserAsync("rekatz");
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
         }
     }
 }

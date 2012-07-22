@@ -44,21 +44,21 @@ namespace CSharp.Geeklist.Test
         {
             var res = _ops.GetUserCardsAsync();
 
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
         }
 
         [TestMethod]
         public void GetUserCardsAsyncTest2()
         {
             var res = _ops.GetUserCardsAsync(1, 2);
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
         }
 
         [TestMethod]
         public void GetUserCardsAsyncTest3()
         {
             var res = _ops.GetUserCardsAsync("coolya");
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
         }
 
         [TestMethod]
@@ -66,8 +66,8 @@ namespace CSharp.Geeklist.Test
         {
             var res = _ops.GetUserCardsAsync("coolya", 1, 2);
 
-            
-            Assert.IsNotNull(res.Result);
+
+            Assert.IsNotNull(res.AsTask().Result);
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@ namespace CSharp.Geeklist.Test
         public void CreateCardAsyncTest()
         {
             var res = _ops.CreateCardAsync("woohooo" + Guid.NewGuid());
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
         }
     }
 }

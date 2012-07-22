@@ -62,7 +62,7 @@ namespace CSharp.Geeklist.Test
         {
             var res = _ops.GetUserFollowersAsync();
 
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace CSharp.Geeklist.Test
         {
             var res = _ops.GetUserFollowersAsync("coolya");
 
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
         }
 
         [TestMethod]
@@ -78,7 +78,7 @@ namespace CSharp.Geeklist.Test
         {
             var res = _ops.GetUserFollowersAsync(1, 11);
 
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
         }
 
         [TestMethod]
@@ -86,7 +86,7 @@ namespace CSharp.Geeklist.Test
         {
             var res = _ops.GetUserFollowersAsync("coolya", 1, 11);
 
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
         }
 
         [TestMethod]

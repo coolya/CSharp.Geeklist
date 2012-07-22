@@ -75,7 +75,7 @@ namespace CSharp.Geeklist.Api.Impl
         {
             try
             {
-                var req = GetRequest(new Uri(uri)).ExecuteRequest().Result;
+                var req = GetRequest(new Uri(uri)).ExecuteRequest().AsTask().Result;
                 return JsonConvert.DeserializeObject<T>(req);
             }
             catch (Exception ex)
@@ -90,7 +90,7 @@ namespace CSharp.Geeklist.Api.Impl
         {
             try
             {
-                var req = GetRequest(new Uri(uri), parameters).ExecuteRequest().Result;
+                var req = GetRequest(new Uri(uri), parameters).ExecuteRequest().AsTask().Result;
                 return JsonConvert.DeserializeObject<T>(req);
             }
             catch (Exception ex)
@@ -104,7 +104,7 @@ namespace CSharp.Geeklist.Api.Impl
         {
             try
             {
-                var req = GetRequest(new Uri(uri), page, count).ExecuteRequest().Result;
+                var req = GetRequest(new Uri(uri), page, count).ExecuteRequest().AsTask().Result;
                 return JsonConvert.DeserializeObject<T>(req);
             }
             catch (Exception ex)
@@ -160,7 +160,7 @@ namespace CSharp.Geeklist.Api.Impl
         {
             try
             {
-                var req = PostRequest(new Uri(uri)).ExecuteRequest().Result;
+                var req = PostRequest(new Uri(uri)).ExecuteRequest().AsTask().Result;
                 return JsonConvert.DeserializeObject<T>(req);
             }
             catch (Exception ex)
@@ -174,7 +174,7 @@ namespace CSharp.Geeklist.Api.Impl
         {
             try
             {
-                var req = PostRequest(new Uri(uri), parameters).ExecuteRequest().Result;
+                var req = PostRequest(new Uri(uri), parameters).ExecuteRequest().AsTask().Result;
                 return JsonConvert.DeserializeObject<T>(req);
             }
             catch (Exception ex)
@@ -210,7 +210,7 @@ namespace CSharp.Geeklist.Api.Impl
         {   //result is irgnores, the request will throw an exception in cause of it fails
             try
             {
-                var req = PostRequest(new Uri(uri)).ExecuteRequest().Result;
+                var req = PostRequest(new Uri(uri)).ExecuteRequest().AsTask().Result;
             }
             catch (Exception ex)
             {
@@ -223,7 +223,7 @@ namespace CSharp.Geeklist.Api.Impl
         {   //result is irgnores, the request will throw an exception in cause of it fails
             try
             {
-                var req = PostRequest(new Uri(uri), parameters).ExecuteRequest().Result;
+                var req = PostRequest(new Uri(uri), parameters).ExecuteRequest().AsTask().Result;
             }
             catch (Exception ex)
             {

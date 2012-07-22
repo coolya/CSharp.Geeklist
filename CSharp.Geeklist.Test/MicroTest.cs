@@ -36,7 +36,7 @@ namespace CSharp.Geeklist.Test
         public void CreateMicroAsyncTest()
         {
             var res = _ops.CreateMicroAsync("Test" + Guid.NewGuid());
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
         }
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace CSharp.Geeklist.Test
         {
             var rekatzMicro = _ops.CreateMicro("Test" + Guid.NewGuid());
             var res = _ops.CreateMicroAsync("Test" + Guid.NewGuid(), rekatzMicro.Micro.Type, rekatzMicro.Micro.Id);
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
         }
 
         [TestMethod]
@@ -79,28 +79,28 @@ namespace CSharp.Geeklist.Test
         public void GetUserMicrosAsyncTest()
         {
             var res = _ops.GetUserMicrosAsync();
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
         }
 
         [TestMethod]
         public void GetUserMicrosAsyncTest2()
         {
             var res = _ops.GetUserMicrosAsync(1, 11);
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
         }
 
         [TestMethod]
         public void GetUserMicrosAsyncTest3()
         {
             var res = _ops.GetUserMicrosAsync("rekatz");
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
         }
 
         [TestMethod]
         public void GetUserMicrosAsyncTest4()
         {
             var res = _ops.GetUserMicrosAsync("rekatz", 1, 11);
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
         }
 
         [TestMethod]
@@ -120,7 +120,7 @@ namespace CSharp.Geeklist.Test
             var rekatzMicro = _ops.GetUserMicros("rekatz").MicrosDetails.Micros[0];
 
             var res = _ops.GetMicroAsync(rekatzMicro.Id);
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.AsTask().Result);
 
             //todo compare each field
         }

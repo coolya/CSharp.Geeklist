@@ -58,28 +58,31 @@ namespace CSharp.Geeklist.Test
         public void GetAllActivitiesAsyncTest()
         {
             var res = _ops.GetAllActivitiesAsync();
-            Assert.AreEqual(10, res.Result.Activities.Count);
+
+
+            
+            Assert.AreEqual(10, res.AsTask().Result.Activities.Count);
         }
 
         [TestMethod]
         public void GetAllActivitiesAsyncTest2()
         {
             var res = _ops.GetAllActivitiesAsync(1, 11);
-            Assert.AreEqual(11, res.Result.Activities.Count);
+            Assert.AreEqual(11, res.AsTask().Result.Activities.Count);
         }
 
         [TestMethod]
         public void GetUserActivitiesAsyncTest()
         {
             var res = _ops.GetUserActivitiesAsync();
-            Assert.AreEqual(10, res.Result.Activities.Count);
+            Assert.AreEqual(10, res.AsTask().Result.Activities.Count);
         }
 
         [TestMethod]
         public void GetUserActivitiesAsyncTest2()
         {
             var res = _ops.GetUserActivitiesAsync(1, 11);
-            Assert.AreEqual(11, res.Result.Activities.Count);
+            Assert.AreEqual(11, res.AsTask().Result.Activities.Count);
         }
 
         [TestMethod]
