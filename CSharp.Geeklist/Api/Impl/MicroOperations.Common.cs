@@ -15,7 +15,9 @@ namespace CSharp.Geeklist.Api.Impl
         const string SINGLE_MICRO = API_ROOT + "micros/{0}";
         const string CREATE_MICRO = API_ROOT + "micros";
 
-        public MicroOperations(Client client) : base(client) {}
+        public MicroOperations(Func<Uri, Task<string>> getHandler, Func<Uri, object, Task<string>> getHandlerWithParameters, Func<Uri, Task<string>> postHandler, Func<Uri, object, Task<string>> postHandlerWithUrlEncodedBody) : base(getHandler, getHandlerWithParameters, postHandler, postHandlerWithUrlEncodedBody)
+        {
+        }
 
         public Models.MicrosResponse GetUserMicros()
         {

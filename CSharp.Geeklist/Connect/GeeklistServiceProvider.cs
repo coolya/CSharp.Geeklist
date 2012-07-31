@@ -23,10 +23,18 @@ using Chq.OAuth;
 using Chq.OAuth.Credentials;
 using CSharp.Geeklist.Api.Interfaces;
 using CSharp.Geeklist.Api.Models;
+using Windows.Foundation;
 
 
 namespace CSharp.Geeklist.Connect
 {
+
+    public delegate IAsyncOperation<string> GetHandler(Uri uri);
+    public delegate IAsyncOperation<string> GetHandlerWithParameters(Uri uri, object parameters);
+
+    public delegate IAsyncOperation<string> PostHandler(Uri uri);
+    public delegate IAsyncOperation<string> PostHandlerWithFormEncodedBody(Uri uri, object body); 
+
     /// <summary>
 	/// Geeklist <see cref="IServiceProvider"/> implementation.
     /// </summary>
@@ -111,22 +119,16 @@ namespace CSharp.Geeklist.Connect
         ///// <param name="accessToken">The API access token.</param>
         ///// <param name="secret">The access token secret.</param>
         ///// <returns>A binding to the service provider's API.</returns>
-        public IGeeklist GetApi(string accessToken, string secret)
+        public IGeeklist GetApi(GetHandler getHandler,
+                                GetHandlerWithParameters getHandlerWithParameters,
+                                PostHandler postHandler,
+                                PostHandlerWithFormEncodedBody postHandlerWithUrlEncodedBody)
         {
-            client.AccessToken = new TokenContainer() { Token = accessToken, Secret = secret };
 
-            return new Geeklist.Api.Impl.GeeklistApi(client);
-        }
-
-        ///// <summary>
-        ///// Returns an API interface allowing the client application to access protected resources on behalf of a user.
-        ///// </summary>
-        ///// <param name="accessToken">The API access token.</param>
-        ///// <param name="secret">The access token secret.</param>
-        ///// <returns>A binding to the service provider's API.</returns>
-        public IGeeklist GetApi(AccessTokenContainer container)
-        {
-            return GetApi(container.Token, container.Secret);
+            return new Geeklist.Api.Impl.GeeklistApi(uri => getHandler(uri).AsTask(),
+                                                     (uri, o) => getHandlerWithParameters(uri, o).AsTask(),
+                                                     uri => postHandler(uri).AsTask(),
+                                                     (uri, o) => postHandlerWithUrlEncodedBody(uri, o).AsTask());
         }
     }
 }

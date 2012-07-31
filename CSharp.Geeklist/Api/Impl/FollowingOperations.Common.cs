@@ -13,7 +13,10 @@ namespace CSharp.Geeklist.Api.Impl
         const string OWN_FOLLOWINGS = API_ROOT + "user/following";
         const string FORING_FOLLOWINGS = API_ROOT + "users/{0}/following";
 
-        public FollowingOperations(Client client): base(client) {}
+
+        public FollowingOperations(Func<Uri, Task<string>> getHandler, Func<Uri, object, Task<string>> getHandlerWithParameters, Func<Uri, Task<string>> postHandler, Func<Uri, object, Task<string>> postHandlerWithUrlEncodedBody) : base(getHandler, getHandlerWithParameters, postHandler, postHandlerWithUrlEncodedBody)
+        {
+        }
 
         public Models.FollowingResponse GetUserFollowing()
         {

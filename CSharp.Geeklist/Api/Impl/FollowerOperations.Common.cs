@@ -15,7 +15,9 @@ namespace CSharp.Geeklist.Api.Impl
         const string FORING_FOLLOWERS = API_ROOT + "users/{0}/followers";
         const string UN_FOLLOW = API_ROOT + "user/follow";
 
-        public FollowerOperations(Client client) : base(client) {}
+        public FollowerOperations(Func<Uri, Task<string>> getHandler, Func<Uri, object, Task<string>> getHandlerWithParameters, Func<Uri, Task<string>> postHandler, Func<Uri, object, Task<string>> postHandlerWithUrlEncodedBody) : base(getHandler, getHandlerWithParameters, postHandler, postHandlerWithUrlEncodedBody)
+        {
+        }
 
         public Models.FollowersResponse GetUserFollowers()
         {

@@ -15,7 +15,10 @@ namespace CSharp.Geeklist.Api.Impl
         const string FORING_ACTIVITIES = API_ROOT + "users/{0}/activity";
         const string GLOBAL_ACTIVITIES = API_ROOT + "activity";
 
-        public ActivityOperation(Client client) : base(client) {}
+
+        public ActivityOperation(Func<Uri, Task<string>> getHandler, Func<Uri, object, Task<string>> getHandlerWithParameters, Func<Uri, Task<string>> postHandler, Func<Uri, object, Task<string>> postHandlerWithUrlEncodedBody) : base(getHandler, getHandlerWithParameters, postHandler, postHandlerWithUrlEncodedBody)
+        {
+        }
 
         public Models.ActivitiesResponse GetUserActivities(Enums.ActivityType type = ActivityType.All)
         {

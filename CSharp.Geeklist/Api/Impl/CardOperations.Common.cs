@@ -16,7 +16,9 @@ namespace CSharp.Geeklist.Api.Impl
         const string SINGLE_CARD = API_ROOT + "cards/{0}";
         const string CREATE_CARD = API_ROOT + "cards";
 
-        public CardOperations(Client client) : base(client) {}
+        public CardOperations(Func<Uri, Task<string>> getHandler, Func<Uri, object, Task<string>> getHandlerWithParameters, Func<Uri, Task<string>> postHandler, Func<Uri, object, Task<string>> postHandlerWithUrlEncodedBody) : base(getHandler, getHandlerWithParameters, postHandler, postHandlerWithUrlEncodedBody)
+        {
+        }
 
         public Models.CardsResponse GetUserCards()
         {

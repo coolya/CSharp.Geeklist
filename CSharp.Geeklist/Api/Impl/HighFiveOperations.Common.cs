@@ -11,7 +11,10 @@ namespace CSharp.Geeklist.Api.Impl
     {
         const string HIGHFIVE = API_ROOT + "highfive";
 
-        public HighFiveOperations(Client client) : base(client) {}
+
+        public HighFiveOperations(Func<Uri, Task<string>> getHandler, Func<Uri, object, Task<string>> getHandlerWithParameters, Func<Uri, Task<string>> postHandler, Func<Uri, object, Task<string>> postHandlerWithUrlEncodedBody) : base(getHandler, getHandlerWithParameters, postHandler, postHandlerWithUrlEncodedBody)
+        {
+        }
 
         public void Highfive(Enums.HighfiveType type, string itemId)
         {

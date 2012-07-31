@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Chq.OAuth;
 using System.Reflection;
 using System.Reflection.Emit;
 using Newtonsoft.Json;
@@ -18,65 +17,54 @@ namespace CSharp.Geeklist.Api.Impl
 #else
         protected const string API_ROOT = "http://api.geekli.st/v1/";
 #endif
-        Client client;
 
-        public OAuthAwareOperation(Client client)
+        private readonly Func<Uri, Task<string>> _getHandler;
+        private readonly Func<Uri, object, Task<string>> _getHandlerWithParameters;
+        private readonly Func<Uri, Task<string>> _postHandler;
+        private readonly Func<Uri, object, Task<string>> _postHandlerWithUrlEncodedBody;
+
+        public OAuthAwareOperation(Func<Uri, Task<string>> getHandler, Func<Uri, object, Task<string>> getHandlerWithParameters, Func<Uri, Task<string>> postHandler, Func<Uri, object, Task<string>> postHandlerWithUrlEncodedBody)
         {
-            this.client = client;
+            _getHandler = getHandler;
+            _getHandlerWithParameters = getHandlerWithParameters;
+            _postHandler = postHandler;
+            _postHandlerWithUrlEncodedBody = postHandlerWithUrlEncodedBody;
         }
 
-        private OAuthRequest GetRequest(Uri uri)
+        private Task<string> GetRequest(Uri uri)
         {
-            return client.MakeRequest("GET")
-                   .ForResource(client.AccessToken.Token, uri)
-                    .Sign(client.AccessToken.Secret);
+            return _getHandler(uri);
         }
 
-        private OAuthRequest GetRequest(Uri uri, int page, int count)
+        private Task<string> GetRequest(Uri uri, int page, int count)
         {
-            return client.MakeRequest("GET")
-                   .ForResource(client.AccessToken.Token, uri)
-                   .WithParameters(new { page = page, count = count})
-                   .Sign(client.AccessToken.Secret);
+            return GetRequest(uri, new {page = page, count = count});
         }
 
-        private OAuthRequest GetRequest(Uri uri,  object parameter)
+        private Task<string> GetRequest(Uri uri,  object parameter)
         {
-            return client.MakeRequest("GET")
-                    .ForResource(client.AccessToken.Token, uri)
-                    .WithParameters(parameter)
-                    .Sign(client.AccessToken.Secret);
+            return _getHandlerWithParameters(uri, parameter);
         }
 
-        private OAuthRequest PostRequest(Uri uri, string data)
+        private Task<string> PostRequest(Uri uri, object data)
         {
-            return client.MakeRequest("POST")
-                .WithData(data)
-                .ForResource(client.AccessToken.Token, uri)
-                .Sign(client.AccessToken.Secret);
-        }
-
-        private OAuthRequest PostRequest(Uri uri, object data)
-        {
-            return client.MakeRequest("POST")
-                .ForResource(client.AccessToken.Token, uri)
-                .WithFormEncodedData(data)                 
-                .Sign(client.AccessToken.Secret);
+            return _postHandlerWithUrlEncodedBody(uri, data);
         }
         
-        private OAuthRequest PostRequest(Uri uri)
+        private Task<string> PostRequest(Uri uri)
         {
-            return client.MakeRequest("POST")
-                .ForResource(client.AccessToken.Token, uri)
-                .Sign(client.AccessToken.Secret);
+            return _postHandler(uri);
         }
 
         protected T Get<T>(string uri)
         {
             try
             {
-                var req = GetRequest(new Uri(uri)).ExecuteRequest().AsTask().Result;
-                return JsonConvert.DeserializeObject<T>(req);
+                var req = GetRequest(new Uri(uri)).Result;
+                var ret = JsonConvert.DeserializeObject<T>(req);
+                
+
+                return ret;
             }
             catch (Exception ex)
             {
@@ -90,7 +78,7 @@ namespace CSharp.Geeklist.Api.Impl
         {
             try
             {
-                var req = GetRequest(new Uri(uri), parameters).ExecuteRequest().AsTask().Result;
+                var req = GetRequest(new Uri(uri), parameters).Result;
                 return JsonConvert.DeserializeObject<T>(req);
             }
             catch (Exception ex)
@@ -104,7 +92,7 @@ namespace CSharp.Geeklist.Api.Impl
         {
             try
             {
-                var req = GetRequest(new Uri(uri), page, count).ExecuteRequest().AsTask().Result;
+                var req = GetRequest(new Uri(uri), page, count).Result;
                 return JsonConvert.DeserializeObject<T>(req);
             }
             catch (Exception ex)
@@ -118,7 +106,7 @@ namespace CSharp.Geeklist.Api.Impl
         {
             try
             {
-                var req = await GetRequest(new Uri(uri)).ExecuteRequest();
+                var req = await GetRequest(new Uri(uri));
                 return await JsonConvert.DeserializeObjectAsync<T>(req);
             }
             catch (Exception ex)
@@ -132,7 +120,7 @@ namespace CSharp.Geeklist.Api.Impl
         {
             try
             {
-                var req = await GetRequest(new Uri(uri), page, count).ExecuteRequest();
+                var req = await GetRequest(new Uri(uri), page, count);
                 return await JsonConvert.DeserializeObjectAsync<T>(req);
             }
             catch (Exception ex)
@@ -146,7 +134,7 @@ namespace CSharp.Geeklist.Api.Impl
         {
             try
             {
-                var req = await GetRequest(new Uri(uri), parameters).ExecuteRequest();
+                var req = await GetRequest(new Uri(uri), parameters);
                 return await JsonConvert.DeserializeObjectAsync<T>(req);
             }
             catch (Exception ex)
@@ -160,7 +148,7 @@ namespace CSharp.Geeklist.Api.Impl
         {
             try
             {
-                var req = PostRequest(new Uri(uri)).ExecuteRequest().AsTask().Result;
+                var req = PostRequest(new Uri(uri)).Result;
                 return JsonConvert.DeserializeObject<T>(req);
             }
             catch (Exception ex)
@@ -174,7 +162,7 @@ namespace CSharp.Geeklist.Api.Impl
         {
             try
             {
-                var req = PostRequest(new Uri(uri), parameters).ExecuteRequest().AsTask().Result;
+                var req = PostRequest(new Uri(uri), parameters).Result;
                 return JsonConvert.DeserializeObject<T>(req);
             }
             catch (Exception ex)
@@ -210,7 +198,7 @@ namespace CSharp.Geeklist.Api.Impl
         {   //result is irgnores, the request will throw an exception in cause of it fails
             try
             {
-                var req = PostRequest(new Uri(uri)).ExecuteRequest().AsTask().Result;
+                var req = PostRequest(new Uri(uri)).Result;
             }
             catch (Exception ex)
             {
@@ -223,7 +211,7 @@ namespace CSharp.Geeklist.Api.Impl
         {   //result is irgnores, the request will throw an exception in cause of it fails
             try
             {
-                var req = PostRequest(new Uri(uri), parameters).ExecuteRequest().AsTask().Result;
+                var req = PostRequest(new Uri(uri), parameters).Result;
             }
             catch (Exception ex)
             {
@@ -236,7 +224,7 @@ namespace CSharp.Geeklist.Api.Impl
         {
             try
             {
-                var req = await PostRequest(new Uri(uri)).ExecuteRequest();
+                var req = await PostRequest(new Uri(uri));
                 return await JsonConvert.DeserializeObjectAsync<T>(req);
             }
             catch (Exception ex)
@@ -250,7 +238,7 @@ namespace CSharp.Geeklist.Api.Impl
         {
             try
             {
-                var req = await PostRequest(new Uri(uri), parameters).ExecuteRequest();
+                var req = await PostRequest(new Uri(uri), parameters);
                 return await JsonConvert.DeserializeObjectAsync<T>(req);
             }
             catch (Exception ex)
@@ -264,7 +252,7 @@ namespace CSharp.Geeklist.Api.Impl
         {
             try
             {
-                var req = await PostRequest(new Uri(uri)).ExecuteRequest();
+                var req = await PostRequest(new Uri(uri));
             }
             catch (Exception ex)
             {
@@ -277,7 +265,7 @@ namespace CSharp.Geeklist.Api.Impl
         {
             try
             {
-                var req = await PostRequest(new Uri(uri), parameters).ExecuteRequest();
+                var req = await PostRequest(new Uri(uri), parameters);
             }
             catch (Exception ex)
             {
