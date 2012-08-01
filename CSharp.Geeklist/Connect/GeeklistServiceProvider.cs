@@ -41,17 +41,33 @@ namespace CSharp.Geeklist.Connect
     /// <author>Scott Smith</author>
     public sealed class GeeklistServiceProvider
     {
+        private readonly GetHandler _getHandler;
+        private readonly GetHandlerWithParameters _getHandlerWithParameters;
+        private readonly PostHandler _postHandler;
+        private readonly PostHandlerWithFormEncodedBody _postHandlerWithUrlEncodedBody;
         Client client;
 
 #if SANDBOX
-        const string REQUEST_TOKEN_URI = "http://sandbox-api.geekli.st/v1/oauth/request_token";
-        const string AUTHORIZE_URI = "http://sandbox.geekli.st/oauth/authorize";
-        const string ACCESS_TOKEN_URI = "http://sandbox-api.geekli.st/v1/oauth/access_token";
+        private const string REQUEST_TOKEN_URI = "http://sandbox-api.geekli.st/v1/oauth/request_token";
+        private const string AUTHORIZE_URI = "http://sandbox.geekli.st/oauth/authorize";
+        private const string ACCESS_TOKEN_URI = "http://sandbox-api.geekli.st/v1/oauth/access_token";
 #else
         const string REQUEST_TOKEN_URI = "http://api.geekli.st/v1/oauth/request_token";
         const string AUTHORIZE_URI = "http://geekli.st/oauth/authorize";
         const string ACCESS_TOKEN_URI = "http://api.geekli.st/v1/oauth/access_token";
 #endif
+
+        public GeeklistServiceProvider(GetHandler getHandler,
+                                GetHandlerWithParameters getHandlerWithParameters,
+                                PostHandler postHandler,
+                                PostHandlerWithFormEncodedBody postHandlerWithUrlEncodedBody)
+        {
+            _getHandler = getHandler;
+            _getHandlerWithParameters = getHandlerWithParameters;
+            _postHandler = postHandler;
+            _postHandlerWithUrlEncodedBody = postHandlerWithUrlEncodedBody;
+        }
+
         /// <summary>
 		/// Creates a new instance of <see cref="GeeklistServiceProvider"/>.
         /// </summary>
@@ -60,9 +76,9 @@ namespace CSharp.Geeklist.Connect
 		public GeeklistServiceProvider(string consumerKey, string consumerSecret)
         {
             var context = new OAuthContext(consumerKey, consumerSecret,
-                                           REQUEST_TOKEN_URI,
-                                           AUTHORIZE_URI,
-                                           ACCESS_TOKEN_URI);
+                                           RequestTokenUri,
+                                           AuthorizeUri,
+                                           AccessTokenUri);
 
             client = new Client(context);
 
@@ -84,9 +100,9 @@ namespace CSharp.Geeklist.Connect
         public GeeklistServiceProvider(string consumerKey, string consumerSecret, string callbackUri)
         {
             var context = new OAuthContext(consumerKey, consumerSecret,
-                                           REQUEST_TOKEN_URI,
-                                           AUTHORIZE_URI,
-                                           ACCESS_TOKEN_URI,
+                                           RequestTokenUri,
+                                           AuthorizeUri,
+                                           AccessTokenUri,
                                            callbackUri, false, SignatureMethods.HMAC_SHA1);
 
             client = new Client(context);
@@ -105,6 +121,21 @@ namespace CSharp.Geeklist.Connect
             get { return client.GetAuthorizationUri(); }
         }
 
+        public static string RequestTokenUri
+        {
+            get { return REQUEST_TOKEN_URI; }
+        }
+
+        public static string AuthorizeUri
+        {
+            get { return AUTHORIZE_URI; }
+        }
+
+        public static string AccessTokenUri
+        {
+            get { return ACCESS_TOKEN_URI; }
+        }
+
         public AccessTokenContainer ParseAccessResponse(string data)
         {
             var token = TokenContainer.Parse(data);
@@ -119,16 +150,13 @@ namespace CSharp.Geeklist.Connect
         ///// <param name="accessToken">The API access token.</param>
         ///// <param name="secret">The access token secret.</param>
         ///// <returns>A binding to the service provider's API.</returns>
-        public IGeeklist GetApi(GetHandler getHandler,
-                                GetHandlerWithParameters getHandlerWithParameters,
-                                PostHandler postHandler,
-                                PostHandlerWithFormEncodedBody postHandlerWithUrlEncodedBody)
+        public IGeeklist GetApi()
         {
 
-            return new Geeklist.Api.Impl.GeeklistApi(uri => getHandler(uri).AsTask(),
-                                                     (uri, o) => getHandlerWithParameters(uri, o).AsTask(),
-                                                     uri => postHandler(uri).AsTask(),
-                                                     (uri, o) => postHandlerWithUrlEncodedBody(uri, o).AsTask());
+            return new Geeklist.Api.Impl.GeeklistApi(uri => _getHandler(uri).AsTask(),
+                                                     (uri, o) => _getHandlerWithParameters(uri, o).AsTask(),
+                                                     uri => _postHandler(uri).AsTask(),
+                                                     (uri, o) => _postHandlerWithUrlEncodedBody(uri, o).AsTask());
         }
     }
 }
