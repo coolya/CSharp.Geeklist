@@ -37,9 +37,6 @@ namespace CSharp.Geeklist.Api.Models
 		public User User { get; set; }
 
 		[JsonIgnore]
-		public string RawJson { get; set; }
-
-		[JsonIgnore]
 		public string ProfileUrl
 		{
 			get { return "http://geekli.st/" + User.ScreenName; }

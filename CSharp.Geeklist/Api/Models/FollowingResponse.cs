@@ -36,7 +36,5 @@ namespace CSharp.Geeklist.Api.Models
 		[JsonProperty("data")]
 		public FollowingDetails FollowingDetails { get; set; }
 
-		[JsonIgnore]
-		public string RawJson { get; set; }
 	}
 }

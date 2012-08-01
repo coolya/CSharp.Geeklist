@@ -36,8 +36,5 @@ namespace CSharp.Geeklist.Api.Models
 
 		[JsonProperty("data")]
 		public IList<Activity> Activities { get; set; }
-
-		[JsonIgnore]
-		public string RawJson { get; set; }
 	}
 }

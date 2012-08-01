@@ -35,8 +35,5 @@ namespace CSharp.Geeklist.Api.Models
 
 		[JsonProperty("data")]
 		public Card Card { get; set; }
-
-		[JsonIgnore]
-		public string RawJson { get; set; }
 	}
 }

@@ -35,8 +35,5 @@ namespace CSharp.Geeklist.Api.Models
 
 		[JsonProperty("data")]
 		public Micro Micro { get; set; }
-
-		[JsonIgnore]
-		public string RawJson { get; set; }
 	}
 }
