@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Chq.OAuth;
-using Newtonsoft.Json;
 using CSharp.Geeklist.Api.Enums;
 using Windows.Foundation;
 

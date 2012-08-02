@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Chq.OAuth;
 using Windows.Foundation;
 
 namespace CSharp.Geeklist.Api.Impl

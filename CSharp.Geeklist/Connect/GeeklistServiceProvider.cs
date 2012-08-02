@@ -19,10 +19,7 @@
 #endregion
 
 using System;
-using Chq.OAuth;
-using Chq.OAuth.Credentials;
 using CSharp.Geeklist.Api.Interfaces;
-using CSharp.Geeklist.Api.Models;
 using Windows.Foundation;
 
 
@@ -45,7 +42,6 @@ namespace CSharp.Geeklist.Connect
         private readonly GetHandlerWithParameters _getHandlerWithParameters;
         private readonly PostHandler _postHandler;
         private readonly PostHandlerWithFormEncodedBody _postHandlerWithUrlEncodedBody;
-        Client client;
 
 #if SANDBOX
         private const string REQUEST_TOKEN_URI = "http://sandbox-api.geekli.st/v1/oauth/request_token";
@@ -68,58 +64,53 @@ namespace CSharp.Geeklist.Connect
             _postHandlerWithUrlEncodedBody = postHandlerWithUrlEncodedBody;
         }
 
-        /// <summary>
-		/// Creates a new instance of <see cref="GeeklistServiceProvider"/>.
-        /// </summary>
-        /// <param name="consumerKey">The application's API key.</param>
-        /// <param name="consumerSecret">The application's API secret.</param>
-		public GeeklistServiceProvider(string consumerKey, string consumerSecret)
-        {
-            var context = new OAuthContext(consumerKey, consumerSecret,
-                                           RequestTokenUri,
-                                           AuthorizeUri,
-                                           AccessTokenUri);
+        ///// <summary>
+        ///// Creates a new instance of <see cref="GeeklistServiceProvider"/>.
+        ///// </summary>
+        ///// <param name="consumerKey">The application's API key.</param>
+        ///// <param name="consumerSecret">The application's API secret.</param>
+        //public GeeklistServiceProvider(string consumerKey, string consumerSecret)
+        //{
+        //    var context = new OAuthContext(consumerKey, consumerSecret,
+        //                                   RequestTokenUri,
+        //                                   AuthorizeUri,
+        //                                   AccessTokenUri);
 
-            client = new Client(context);
+        //    client = new Client(context);
 
             
-            var requestTokenResponse = client.MakeRequest("GET")
-            .ForRequestToken()
-            .Sign()
-            .ExecuteRequest().AsTask().Result;
+        //    var requestTokenResponse = client.MakeRequest("GET")
+        //    .ForRequestToken()
+        //    .Sign()
+        //    .ExecuteRequest().AsTask().Result;
 
-            client.RequestToken = TokenContainer.Parse(requestTokenResponse);
-        }
+        //    client.RequestToken = TokenContainer.Parse(requestTokenResponse);
+        //}
 
-        /// <summary>
-        /// Creates a new instance of <see cref="GeeklistServiceProvider"/>.
-        /// </summary>
-        /// <param name="consumerKey">The application's API key.</param>
-        /// <param name="consumerSecret">The application's API secret.</param>
-        /// <param name="callbackUri">The callback Uri </param>
-        public GeeklistServiceProvider(string consumerKey, string consumerSecret, string callbackUri)
-        {
-            var context = new OAuthContext(consumerKey, consumerSecret,
-                                           RequestTokenUri,
-                                           AuthorizeUri,
-                                           AccessTokenUri,
-                                           callbackUri, false, SignatureMethods.HMAC_SHA1);
+        ///// <summary>
+        ///// Creates a new instance of <see cref="GeeklistServiceProvider"/>.
+        ///// </summary>
+        ///// <param name="consumerKey">The application's API key.</param>
+        ///// <param name="consumerSecret">The application's API secret.</param>
+        ///// <param name="callbackUri">The callback Uri </param>
+        //public GeeklistServiceProvider(string consumerKey, string consumerSecret, string callbackUri)
+        //{
+        //    var context = new OAuthContext(consumerKey, consumerSecret,
+        //                                   RequestTokenUri,
+        //                                   AuthorizeUri,
+        //                                   AccessTokenUri,
+        //                                   callbackUri, false, SignatureMethods.HMAC_SHA1);
 
-            client = new Client(context);
+        //    client = new Client(context);
 
 
-            var requestTokenResponse = client.MakeRequest("GET")
-            .ForRequestToken()
-            .Sign()
-            .ExecuteRequest().AsTask().Result;
+        //    var requestTokenResponse = client.MakeRequest("GET")
+        //    .ForRequestToken()
+        //    .Sign()
+        //    .ExecuteRequest().AsTask().Result;
 
-            client.RequestToken = TokenContainer.Parse(requestTokenResponse);
-        }
-
-        public Uri GetAuthorizationUri
-        {
-            get { return client.GetAuthorizationUri(); }
-        }
+        //    client.RequestToken = TokenContainer.Parse(requestTokenResponse);
+        //}
 
         public static string RequestTokenUri
         {
@@ -136,12 +127,6 @@ namespace CSharp.Geeklist.Connect
             get { return ACCESS_TOKEN_URI; }
         }
 
-        public AccessTokenContainer ParseAccessResponse(string data)
-        {
-            var token = TokenContainer.Parse(data);
-
-            return new AccessTokenContainer(token.Token, token.Secret);
-        }
 
 
         ///// <summary>
